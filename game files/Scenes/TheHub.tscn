@@ -1,0 +1,171 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
+[ext_resource path="res://MapData/TheHub/Level_slot0_normal_roughness.packed_tex" type="Texture" id=3]
+[ext_resource path="res://MapData/TheHub/Level_slot1_albedo_bump.packed_tex" type="Texture" id=4]
+[ext_resource path="res://MapData/TheHub/Level_slot0_albedo_bump.packed_tex" type="Texture" id=5]
+[ext_resource path="res://MapData/TheHub/Level_slot1_normal_roughness.packed_tex" type="Texture" id=6]
+[ext_resource path="res://Materials/water/water3.png" type="Texture" id=7]
+[ext_resource path="res://Materials/water/water1.png" type="Texture" id=8]
+[ext_resource path="res://Materials/water/water2.png" type="Texture" id=9]
+[ext_resource path="res://MapData/TheHub/data.hterrain" type="Resource" id=10]
+[ext_resource path="res://Materials/rock.png" type="Texture" id=11]
+[ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=12]
+[ext_resource path="res://Object/mapLoader.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Object/mapUnloader.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 1 )
+mode = 0
+textures = [ [ ExtResource( 5 ), ExtResource( 4 ) ], [ ExtResource( 3 ), ExtResource( 6 ) ] ]
+
+[sub_resource type="PlaneMesh" id=4]
+
+[sub_resource type="AnimatedTexture" id=5]
+flags = 19
+frames = 3
+fps = 2.0
+frame_0/texture = ExtResource( 8 )
+frame_1/texture = ExtResource( 9 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 7 )
+frame_2/delay_sec = 0.0
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_world_triplanar = true
+albedo_color = Color( 1, 1, 1, 0.784314 )
+albedo_texture = SubResource( 5 )
+roughness = 0.6
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 11 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 11 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+
+[node name="TheHub" type="Spatial"]
+
+[node name="HTerrain" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 512 )
+script = ExtResource( 2 )
+_terrain_data = ExtResource( 10 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 2 )
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = true
+shader_params/u_tile_reduction = Plane( 1, 1, 1, 1 )
+
+[node name="Water" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Water"]
+transform = Transform( 256, 0, 0, 0, 1, 0, 0, 0, 256, 384, -0.5, 768 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )
+
+[node name="Rocks" type="Spatial" parent="."]
+
+[node name="Rock" type="MeshInstance" parent="Rocks"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 640.6, 18.2, 793 )
+mesh = ExtResource( 12 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 7 )
+
+[node name="Rock2" type="MeshInstance" parent="Rocks"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 645.6, 13.2, 874 )
+mesh = ExtResource( 12 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 7 )
+
+[node name="Rock3" type="MeshInstance" parent="Rocks"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 645.6, 27.2, 863 )
+mesh = ExtResource( 12 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 7 )
+
+[node name="Rock5" type="MeshInstance" parent="Rocks"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 12, 645.6, 28.2, 811 )
+mesh = ExtResource( 12 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 7 )
+
+[node name="Rock4" type="MeshInstance" parent="Rocks"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 14, 645.6, 31.2, 842 )
+mesh = ExtResource( 12 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 7 )
+
+[node name="mapLoader" parent="." instance=ExtResource( 13 )]
+transform = Transform( 25.9808, 0, -0.5, 0, 20, 0, 15, 0, 0.866025, 590, 4, 927 )
+
+[node name="mapLoader2" parent="." instance=ExtResource( 13 )]
+transform = Transform( 21.2132, 0, 0.707107, 0, 20, 0, -21.2132, 0, 0.707107, 519, 4, 920 )
+mapId = 2
+
+[node name="mapUnloader2" parent="." instance=ExtResource( 14 )]
+transform = Transform( 38.637, 0, 0.258819, 0, 20, 0, -10.3528, 0, 0.965926, 506, 7, 881 )
+mapId = 2
+
+[node name="mapUnloader3" parent="." instance=ExtResource( 14 )]
+transform = Transform( 28.2843, 0, -0.707107, 0, 20, 0, 28.2842, 0, 0.707107, 603, 7, 881 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 374, 0, 726 )
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 9, -4 )
+width = 68.0
+height = 18.0
+depth = 68.0
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox"]
+operation = 2
+width = 66.0
+height = 16.0
+depth = 66.0
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -34 )
+operation = 2
+width = 14.0
+height = 12.0
+depth = 4.0
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 33 )
+operation = 2
+width = 14.0
+height = 12.0
+depth = 4.0
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, -2, 2 )
+operation = 2
+width = 4.0
+height = 12.0
+depth = 14.0
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34, -2, 2 )
+operation = 2
+width = 4.0
+height = 12.0
+depth = 14.0

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_sky = SubResource( 2 )
+background_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.02
+ss_reflections_enabled = true
+ssao_enabled = true
+
+[node name="Night" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )

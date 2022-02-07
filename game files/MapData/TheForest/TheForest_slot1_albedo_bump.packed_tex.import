@@ -1,0 +1,18 @@
+[remap]
+
+importer="hterrain_packed_texture_importer"
+type="StreamTexture"
+path.s3tc="res://.import/TheForest_slot1_albedo_bump.packed_tex-ed57120c15fee8b4afaf2a9f58cb9d93.s3tc.stex"
+path.etc2="res://.import/TheForest_slot1_albedo_bump.packed_tex-ed57120c15fee8b4afaf2a9f58cb9d93.etc2.stex"
+
+[deps]
+
+source_file="res://MapData/TheForest/TheForest_slot1_albedo_bump.packed_tex"
+dest_files=[ "res://.import/TheForest_slot1_albedo_bump.packed_tex-ed57120c15fee8b4afaf2a9f58cb9d93.s3tc.stex", "res://.import/TheForest_slot1_albedo_bump.packed_tex-ed57120c15fee8b4afaf2a9f58cb9d93.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true

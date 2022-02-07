@@ -1,0 +1,18 @@
+[remap]
+
+importer="hterrain_packed_texture_importer"
+type="StreamTexture"
+path.s3tc="res://.import/TheForest_slot1_normal_roughness.packed_tex-88524ba7180942d007aaf9b60f0b9e5c.s3tc.stex"
+path.etc2="res://.import/TheForest_slot1_normal_roughness.packed_tex-88524ba7180942d007aaf9b60f0b9e5c.etc2.stex"
+
+[deps]
+
+source_file="res://MapData/TheForest/TheForest_slot1_normal_roughness.packed_tex"
+dest_files=[ "res://.import/TheForest_slot1_normal_roughness.packed_tex-88524ba7180942d007aaf9b60f0b9e5c.s3tc.stex", "res://.import/TheForest_slot1_normal_roughness.packed_tex-88524ba7180942d007aaf9b60f0b9e5c.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
