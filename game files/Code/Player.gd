@@ -42,7 +42,7 @@ func _process(delta):
 		horizontalAcceleration = airAcceleration
 	elif is_on_floor() and fullContact:
 		gravityVector = Vector3()
-		gravityVector = -get_floor_normal() * gravity*delta
+		gravityVector = -get_floor_normal() * gravity
 		horizontalAcceleration = normalAcceleration
 	else:
 		gravityVector = Vector3()

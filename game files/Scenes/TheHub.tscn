@@ -169,3 +169,57 @@ operation = 2
 width = 4.0
 height = 12.0
 depth = 14.0
+
+[node name="City" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 765 )
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66, 15, -8.02075 )
+width = 132.0
+height = 34.0
+depth = 198.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="City/CSGBox"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13, -10, 59 )
+operation = 2
+radius = 16.0
+height = 114.0
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="City/CSGBox"]
+transform = Transform( 0, 0, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, 0, -28, -10, 83 )
+operation = 2
+radius = 16.0
+height = 80.0
+
+[node name="CSGPolygon" type="CSGPolygon" parent="City/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.1, -15, -59 )
+operation = 2
+polygon = PoolVector2Array( 1, 0, 1, 15, -24, 15 )
+depth = 10.0
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="City/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, -2, -7 )
+operation = 2
+polygon = PoolVector2Array( 1, 0, 1, 19, -29, 19 )
+depth = 10.0
+
+[node name="CSGBox" type="CSGBox" parent="City/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 8, -64 )
+operation = 2
+width = 42.0
+height = 20.0
+depth = 10.0
+
+[node name="CSGBox2" type="CSGBox" parent="City/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 8, -38 )
+operation = 2
+width = 10.0
+height = 20.0
+depth = 62.0
+
+[node name="CSGBox2" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55, -1, 60 )
+width = 110.0
+depth = 62.0
