@@ -64,7 +64,9 @@ func _process(delta):
 	movement.z = horizontalVelocity.z + gravityVector.z
 	movement.x = horizontalVelocity.x + gravityVector.x
 	movement.y = gravityVector.y
-		
+	
+	movement += get_floor_velocity()
+	
 	move_and_slide(movement, Vector3.UP)
 
 func onFloor():
