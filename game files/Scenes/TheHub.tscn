@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=12]
 [ext_resource path="res://Object/mapLoader.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Object/mapUnloader.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Object/Torch.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -114,6 +115,15 @@ material/0 = SubResource( 7 )
 [node name="mapLoader" parent="." instance=ExtResource( 13 )]
 transform = Transform( 25.9808, 0, -0.5, 0, 20, 0, 15, 0, 0.866025, 590, 4, 927 )
 
+[node name="mapUnloader3" parent="." instance=ExtResource( 14 )]
+transform = Transform( 28.2843, 0, -0.707107, 0, 20, 0, 28.2842, 0, 0.707107, 603, 7, 881 )
+
+[node name="mapLoader3" parent="." instance=ExtResource( 13 )]
+transform = Transform( 6, 0, 0, 0, 10, 0, 0, 0, 1, 93, 23, 701 )
+
+[node name="mapUnloader4" parent="." instance=ExtResource( 14 )]
+transform = Transform( 5, 0, 0, 0, 10, 0, 0, 0, 1, 93, 23, 724 )
+
 [node name="mapLoader2" parent="." instance=ExtResource( 13 )]
 transform = Transform( 21.2132, 0, 0.707107, 0, 20, 0, -21.2132, 0, 0.707107, 519, 4, 920 )
 mapId = 2
@@ -122,11 +132,8 @@ mapId = 2
 transform = Transform( 38.637, 0, 0.258819, 0, 20, 0, -10.3528, 0, 0.965926, 506, 7, 881 )
 mapId = 2
 
-[node name="mapUnloader3" parent="." instance=ExtResource( 14 )]
-transform = Transform( 28.2843, 0, -0.707107, 0, 20, 0, 28.2842, 0, 0.707107, 603, 7, 881 )
-
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 374, 0, 726 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 374, -0.9, 726 )
 material_override = SubResource( 1 )
 use_collision = true
 
@@ -219,7 +226,51 @@ width = 10.0
 height = 20.0
 depth = 62.0
 
+[node name="CSGBox3" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 69, -54.0208 )
+width = 26.0
+height = 74.0
+depth = 24.0
+
+[node name="CSGBox4" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 69, -28.0208 )
+width = 26.0
+height = 74.0
+depth = 24.0
+
+[node name="CSGBox5" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 69, 12.9792 )
+width = 68.0
+height = 74.0
+depth = 56.0
+
+[node name="CSGBox6" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 69, -40.0208 )
+width = 28.0
+height = 74.0
+depth = 30.0
+
+[node name="CSGBox7" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 69, -76.0208 )
+width = 28.0
+height = 74.0
+depth = 30.0
+
+[node name="CSGBox8" type="CSGBox" parent="City"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 50, -86.0208 )
+width = 16.0
+height = 36.0
+depth = 14.0
+
 [node name="CSGBox2" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55, -1, 60 )
 width = 110.0
 depth = 62.0
+
+[node name="Torches" type="Spatial" parent="."]
+
+[node name="Torch" parent="Torches" instance=ExtResource( 15 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 88, 17, 692 )
+
+[node name="Torch2" parent="Torches" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 93, 17, 750 )

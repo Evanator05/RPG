@@ -50,7 +50,7 @@ height = 10.0
 depth = 10.0
 
 [node name="CSGBox2dig" type="CSGBox" parent="Section1/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59, -3, -108 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, -3, -108 )
 operation = 2
 width = 98.0
 height = 12.0
@@ -92,6 +92,37 @@ depth = 10.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 750, -1, 830 )
 width = 220.0
 depth = 250.0
+
+[node name="Section2" type="CSGCombiner" parent="."]
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="Section2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 925, 9, 830 )
+width = 130.0
+height = 26.0
+depth = 250.0
+
+[node name="CSGBox2" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 0, -65 )
+operation = 2
+width = 26.0
+height = 18.0
+depth = 62.0
+
+[node name="CSGBox3" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 74 )
+operation = 2
+width = 50.0
+height = 18.0
+depth = 62.0
+
+[node name="CSGBox4" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51, -11, 77 )
+operation = 2
+width = 10.0
+height = 8.0
+depth = 10.0
 
 [node name="Torches" type="Spatial" parent="."]
 

@@ -1,7 +1,9 @@
 extends Node
 
 var maps
-
+var playerSpawnPos = Vector3(361,2,705)
+var playerSpawnRot = Vector3(0,180,0)
+var playerMapChunks = [0,1]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

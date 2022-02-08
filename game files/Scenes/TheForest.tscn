@@ -121,6 +121,30 @@ mesh = ExtResource( 7 )
 skeleton = NodePath("../../../TheHub")
 material/0 = SubResource( 3 )
 
+[node name="Rock14" type="MeshInstance" parent="Rocks"]
+transform = Transform( 5, 0, -8.66025, 0, 10, 0, 8.66025, 0, 5, 321.4, 21.4, 512 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock17" type="MeshInstance" parent="Rocks"]
+transform = Transform( 5, 0, -8.66025, 0, 10, 0, 8.66025, 0, 5, 418.4, 26.4, 512 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock15" type="MeshInstance" parent="Rocks"]
+transform = Transform( 5, 0, -8.66025, 0, 10, 0, 8.66025, 0, 5, 303.4, 28.4, 512 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock16" type="MeshInstance" parent="Rocks"]
+transform = Transform( 4.33013, 5, -7.5, -2.5, 8.66025, 4.33013, 8.66025, 0, 5, 288.4, 37.4, 512 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
 [node name="Rock9" type="MeshInstance" parent="Rocks"]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 404.4, 21.4, 505 )
 mesh = ExtResource( 7 )

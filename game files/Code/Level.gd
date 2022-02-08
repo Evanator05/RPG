@@ -1,11 +1,14 @@
 extends Spatial
 
-# Called when the node enters the scene tree for the first time.
+var player = preload("res://Object/Player.tscn")
+
 func _ready():
 	Globals.maps = $Maps
-	Globals.maps.loadMapSections([0,1])
+	spawnPlayer()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func spawnPlayer():
+	var playerInst = player.instance()
+	playerInst.global_transform.origin = Globals.playerSpawnPos
+	playerInst.rotation_degrees = Globals.playerSpawnRot
+	add_child(playerInst)
+	Globals.maps.loadMapSections(Globals.playerMapChunks)
