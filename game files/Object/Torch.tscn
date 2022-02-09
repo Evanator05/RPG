@@ -127,8 +127,9 @@ omni_shadow_detail = 0
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 1 )
 stream = ExtResource( 9 )
-unit_db = 5.0
-unit_size = 5.0
+unit_db = 2.0
+unit_size = 3.0
+max_db = -16.538
 pitch_scale = 0.5
 autoplay = true
 max_distance = 50.0

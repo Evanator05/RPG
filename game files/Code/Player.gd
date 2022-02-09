@@ -20,6 +20,8 @@ var gravityVector = Vector3()
 
 onready var head = $head
 onready var groundChecks = $feetRaycasts.get_children()
+onready var interactCast = $head/interactCast
+
 
 func _ready():
 	add_to_group("Player")
@@ -44,10 +46,7 @@ func _process(delta):
 		gravityVector = Vector3()
 		gravityVector = -get_floor_normal() * gravity
 		horizontalAcceleration = normalAcceleration
-	else:
-		gravityVector = Vector3()
-		gravityVector = -get_floor_normal()
-		horizontalAcceleration = normalAcceleration
+
 	
 	if Input.is_action_just_pressed("jump") and (is_on_floor() and fullContact):
 		gravityVector = get_floor_normal() * jumpForce
@@ -68,6 +67,13 @@ func _process(delta):
 	movement += get_floor_velocity()
 	
 	move_and_slide(movement, Vector3.UP)
+	
+	#interacting
+	if Input.is_action_just_pressed("interact"):
+		var collision = interactCast.get_collider()
+		if collision != null:
+			if collision.is_in_group("interact"):
+				collision.interact(self)
 
 func onFloor():
 	for cast in groundChecks:
