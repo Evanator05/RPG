@@ -129,9 +129,9 @@ depth = 250.0
 [node name="CSGBox7dig4" type="CSGBox" parent="Section1/CSGBox2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84, -1, -19 )
 operation = 2
-width = 10.0
+width = 12.0
 height = 6.0
-depth = 10.0
+depth = 12.0
 
 [node name="Section2" type="CSGCombiner" parent="."]
 material_override = SubResource( 1 )
