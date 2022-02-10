@@ -6,7 +6,7 @@ func _ready():
 	add_to_group("interact")
 	lift = get_node(lift)
 
-func interact(object):
+func interact(_object):
 	if not lift.isMoving:
 		lift.startMoving()
 		$AnimationPlayer.play("flip")

@@ -196,28 +196,106 @@ depth = 10.0
 [node name="CSGBox3" type="CSGBox" parent="Section3/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -76, 0 )
 operation = 2
-width = 6.0
+width = 10.0
 height = 10.0
 depth = 10.0
 
 [node name="CSGBox4" type="CSGBox" parent="Section3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 850, -193, 907 )
-width = 38.0
-height = 16.0
-depth = 46.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 779, -193, 907 )
+width = 178.0
+height = 80.0
+depth = 212.0
 
-[node name="CSGBox5" type="CSGBox" parent="Section3/CSGBox4"]
+[node name="CSGBox5dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
 operation = 2
-width = 34.0
+width = 56.0
 height = 12.0
 depth = 42.0
 
-[node name="CSGBox6" type="CSGBox" parent="Section3/CSGBox4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -1, 0 )
+[node name="CSGBox9dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -86 )
+operation = 2
+width = 40.0
+height = 12.0
+depth = 30.0
+
+[node name="CSGBox10dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -1, -95 )
+operation = 2
+width = 10.0
+height = 86.0
+depth = 12.0
+
+[node name="CSGBox8dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 46 )
+operation = 2
+width = 56.0
+height = 12.0
+depth = 42.0
+
+[node name="CSGBox6dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89, -1, 0 )
 operation = 2
 width = 4.0
 height = 10.0
 depth = 10.0
+
+[node name="CSGBox7dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -1, 23 )
+operation = 2
+width = 10.0
+height = 10.0
+depth = 4.0
+
+[node name="CSGBox11dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, 48 )
+operation = 2
+width = 4.0
+height = 10.0
+depth = 10.0
+
+[node name="CSGBox12dig" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 13, 18 )
+operation = 2
+width = 66.0
+height = 38.0
+depth = 122.0
+
+[node name="CSGBox12dig2" type="CSGBox" parent="Section3/CSGBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -21, 18 )
+operation = 2
+width = 26.0
+height = 30.0
+depth = 122.0
+
+[node name="CSGBox5" type="CSGBox" parent="Section3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 774, -200, 872 )
+width = 26.0
+depth = 16.0
+
+[node name="Section4" type="CSGCombiner" parent="."]
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox5" type="CSGBox" parent="Section4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 834, -111, 811 )
+width = 16.0
+height = 216.0
+depth = 14.0
+
+[node name="CSGBox6" type="CSGBox" parent="Section4/CSGBox5"]
+operation = 2
+width = 10.0
+height = 216.0
+depth = 10.0
+
+[node name="CSGBox7" type="CSGBox" parent="Section4/CSGBox5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -83, 0 )
+operation = 2
+width = 18.0
+height = 10.0
+depth = 16.0
 
 [node name="Torches" type="Spatial" parent="."]
 
@@ -287,3 +365,17 @@ topPos = -1
 botPos = -200
 startTop = true
 maxSpeed = 25
+
+[node name="MeshInstance3" type="MeshInstance" parent="MovingPlatform2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -126, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../../MovingPlatform")
+material/0 = null
+
+[node name="LiftLever3" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, -3.82137e-15, 1, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 841, -196, 806.8 )
+lift = NodePath("../MovingPlatform2")
+
+[node name="LiftLever4" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 832, 1, 805 )
+lift = NodePath("../MovingPlatform2")

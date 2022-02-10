@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/liftGears.wav-123e4d9acd564a8768fd4aba754347b0.sample"
+path="res://.import/liftGears.wav-aa0cc0ba4e098e3e002fb95199fa99cc.sample"
 
 [deps]
 
-source_file="res://Audio/liftGears.wav"
-dest_files=[ "res://.import/liftGears.wav-123e4d9acd564a8768fd4aba754347b0.sample" ]
+source_file="res://Audio/Lifts/liftGears.wav"
+dest_files=[ "res://.import/liftGears.wav-aa0cc0ba4e098e3e002fb95199fa99cc.sample" ]
 
 [params]
 

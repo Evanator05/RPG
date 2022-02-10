@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/liftStop.wav-7e0f931db37b3f9367e1d315c18e8345.sample"
+path="res://.import/activate.wav-ea3419e8c1610df51c119f913148fff4.sample"
 
 [deps]
 
-source_file="res://Audio/liftStop.wav"
-dest_files=[ "res://.import/liftStop.wav-7e0f931db37b3f9367e1d315c18e8345.sample" ]
+source_file="res://Audio/Lamps/activate.wav"
+dest_files=[ "res://.import/activate.wav-ea3419e8c1610df51c119f913148fff4.sample" ]
 
 [params]
 

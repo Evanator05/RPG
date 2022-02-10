@@ -43,7 +43,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CSGExport/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 

@@ -2,8 +2,8 @@ extends KinematicBody
 
 var movement = Vector3()
 
-onready var liftGears = preload("res://Audio/liftGears.wav")
-onready var liftStop = preload("res://Audio/liftStop.wav")
+export(Resource) var liftGears
+export(Resource) var liftStop
 
 export var topPos = 0
 export var botPos = 0

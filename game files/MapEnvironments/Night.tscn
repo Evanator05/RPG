@@ -21,6 +21,12 @@ ssao_enabled = true
 dof_blur_far_enabled = true
 dof_blur_far_distance = 256.0
 dof_blur_far_amount = 0.05
+dof_blur_far_quality = 0
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.5
+glow_bicubic_upscale = true
+glow_high_quality = true
 
 [node name="Night" type="Spatial"]
 
