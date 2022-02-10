@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Code/Player.gd" type="Script" id=1]
 [ext_resource path="res://Code/UI.gd" type="Script" id=2]
@@ -11,6 +11,24 @@ height = 1.0
 
 [sub_resource type="CapsuleMesh" id=3]
 mid_height = 2.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0, 0, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.392157, 0.392157, 0.392157, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -67,6 +85,22 @@ margin_top = -1.0
 margin_right = 1.0
 margin_bottom = 1.0
 color = Color( 1, 1, 1, 0.498039 )
+
+[node name="HealthBar" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/HealthBar"]
+margin_left = 32.0
+margin_top = 16.0
+margin_right = 576.0
+margin_bottom = 32.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+value = 50.0
 
 [node name="screenFade" type="ColorRect" parent="UI"]
 anchor_right = 1.0
