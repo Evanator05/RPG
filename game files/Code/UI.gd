@@ -14,5 +14,8 @@ func _ready():
 func _process(delta):
 	$screenFade.color.a = lerp($screenFade.color.a, fadeAmount, 1 - pow(0.5,delta))
 
+func updateUI(health):
+	updateHealthBar(health)
+
 func updateHealthBar(amount):
 	healthBar.value = amount

@@ -9,7 +9,7 @@ var playerMapChunks
 var playerName
 
 func _ready():
-	savePlayer("Evan", Vector3(),Vector3(),[0,1])
+	pass
 
 func getSaves():
 	var characters = []
@@ -28,18 +28,18 @@ func getSaves():
 
 	return characters
 
-func savePlayer(playerName:String, spawnPos:Vector3, spawnRot:Vector3, mapChunks:Array):
+func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChunks:Array):
 	#create folders
 	var dir = Directory.new()
 	dir.open("user://")
 	dir.make_dir("Characters")
 	dir.open("user://Characters")
 	dir.open("Characters")
-	dir.make_dir(playerName)
+	dir.make_dir(characterName)
 	
 	#save player data
 	var file = File.new()
-	file.open("user://Characters/" + playerName + "/playerPosition.json", File.WRITE)
+	file.open("user://Characters/" + characterName + "/playerPosition.json", File.WRITE)
 	file.store_var(makePlayerJson(spawnPos, spawnRot, mapChunks))
 	file.close()
 	
@@ -53,11 +53,11 @@ func makePlayerJson(spawnPos, spawnRot, mapChunks):
 	}
 	return data
 
-func loadPlayer(playerName):
+func loadPlayer(characterName):
 	#get player data
 	var file = File.new()
-	if file.file_exists("user://Characters/" + playerName + "/playerPosition.json"):
-		file.open("user://Characters/" + playerName + "/playerPosition.json", File.READ)
+	if file.file_exists("user://Characters/" + characterName + "/playerPosition.json"):
+		file.open("user://Characters/" + characterName + "/playerPosition.json", File.READ)
 		var json = file.get_var(true)
 		file.close()
 		

@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Fonts/Roboto-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Code/MakeCharacter.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.333
+anchor_right = 0.667
+anchor_bottom = 0.119
+margin_left = 0.640015
+margin_right = -0.640137
+margin_bottom = -0.520004
+custom_fonts/font = SubResource( 1 )
+text = "Create A Character"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="."]
+anchor_left = 0.367
+anchor_top = 0.119
+anchor_right = 0.633
+anchor_bottom = 0.181
+margin_left = -0.640015
+margin_top = -0.520004
+margin_right = 0.640015
+margin_bottom = -0.480011
+custom_fonts/font = SubResource( 2 )
+align = 1
+placeholder_text = "Name"
+
+[node name="CreateCharacter" type="Button" parent="."]
+anchor_left = 0.433
+anchor_top = 0.83
+anchor_right = 0.567
+anchor_bottom = 0.948
+margin_left = 0.639954
+margin_top = -0.400024
+margin_right = -0.640015
+margin_bottom = 0.159912
+custom_fonts/font = SubResource( 3 )
+text = "Create"
+
+[connection signal="pressed" from="CreateCharacter" to="." method="_on_CreateCharacter_pressed"]

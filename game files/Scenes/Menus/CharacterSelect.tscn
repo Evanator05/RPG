@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Code/CharacterSelect.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 32
-outline_size = 5
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
@@ -19,6 +19,19 @@ border_width_right = 6
 border_width_bottom = 6
 border_blend = true
 
+[sub_resource type="DynamicFont" id=4]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,25 +41,25 @@ __meta__ = {
 }
 
 [node name="ItemList" type="ItemList" parent="."]
-anchor_left = 0.367
+anchor_left = 0.133
 anchor_top = 0.172
-anchor_right = 0.633
+anchor_right = 0.867
 anchor_bottom = 0.828
-margin_left = -0.640015
+margin_left = 0.639999
 margin_top = 0.23999
-margin_right = 0.640015
+margin_right = -0.640137
 margin_bottom = -0.240051
 custom_colors/guide_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_styles/selected = SubResource( 3 )
 custom_styles/bg = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
+[node name="newCharacter" type="Button" parent="."]
 anchor_left = 0.367
 anchor_top = 0.859
 anchor_right = 0.467
@@ -55,6 +68,11 @@ margin_left = -0.640015
 margin_top = 0.279968
 margin_right = -0.640015
 margin_bottom = -0.52002
+custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 text = "New Character"
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="newCharacter" to="." method="_on_newCharacter_pressed"]
