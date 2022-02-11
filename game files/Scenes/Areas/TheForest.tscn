@@ -232,7 +232,79 @@ transform = Transform( -7.76457, 0, -28.9778, 0, 25, 0, 28.9778, 0, -7.76457, 30
 shape = SubResource( 8 )
 
 [node name="Rock19" type="MeshInstance" parent="Mountain"]
-transform = Transform( -7.76457, 0, -28.9778, 0, 10, 0, 28.9778, 0, -7.76457, 314.3, 51.4, 281 )
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 329.3, 51.4, 281 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock22" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 334.3, 51.4, 305 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock23" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 308.3, 51.4, 305 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock24" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 281.3, 51.4, 305 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock25" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 273.3, 51.4, 305 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock26" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 273.3, 51.4, 284 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock27" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 273.3, 51.4, 267 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock28" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 273.3, 51.4, 250 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock29" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 290.3, 51.4, 250 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock30" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 313.3, 51.4, 250 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock31" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 333.3, 51.4, 250 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock32" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 328.3, 51.4, 263 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../TheHub")
+material/0 = SubResource( 3 )
+
+[node name="Rock33" type="MeshInstance" parent="Mountain"]
+transform = Transform( -2.58819, 0, -9.65926, 0, 10, 0, 9.65926, 0, -2.58819, 333.3, 39.4, 236 )
 mesh = ExtResource( 7 )
 skeleton = NodePath("../../../TheHub")
 material/0 = SubResource( 3 )

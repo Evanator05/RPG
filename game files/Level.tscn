@@ -33,6 +33,14 @@ mapChunks = [ 0, 1 ]
 [node name="SpawnPos" type="Position3D" parent="LampPosts/LampPost"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
 
+[node name="LampPost3" parent="LampPosts" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, -0.999998, 274 )
+spawnRot = 90
+mapChunks = [ 1 ]
+
+[node name="SpawnPos" type="Position3D" parent="LampPosts/LampPost3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
+
 [node name="LampPost2" parent="LampPosts" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 627, -0.999998, 829 )
 mapChunks = [ 2, 0 ]

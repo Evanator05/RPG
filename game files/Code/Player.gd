@@ -39,6 +39,7 @@ func _input(event):
 
 func _process(delta):
 	direction = Vector3()
+	takeDamage(delta)
 	fullContact = $floorCast.is_colliding()
 	
 	if not is_on_floor():
