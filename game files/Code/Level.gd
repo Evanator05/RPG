@@ -4,6 +4,7 @@ var player = preload("res://Object/Player.tscn")
 
 func _ready():
 	Globals.maps = $Maps
+	Globals.loadPlayer(Globals.playerName)
 	spawnPlayer()
 
 func spawnPlayer():

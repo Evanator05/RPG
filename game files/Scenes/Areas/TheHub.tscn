@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://Object/mapLoader.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Object/mapUnloader.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Object/Torch.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Object/LampPost.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -230,21 +229,7 @@ depth = 62.0
 [node name="Torches" type="Spatial" parent="."]
 
 [node name="Torch" parent="Torches" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 88, 17, 692 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 88, 15, 692 )
 
 [node name="Torch2" parent="Torches" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 93, 17, 751 )
-
-[node name="LampPost" parent="." instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 355, -0.9, 731 )
-mapChunks = [ 0, 1 ]
-
-[node name="SpawnPos" type="Position3D" parent="LampPost"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
-
-[node name="LampPost2" parent="." instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 32.1, 784 )
-mapChunks = [ 0, 1 ]
-
-[node name="SpawnPos" type="Position3D" parent="LampPost2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 93, 15, 752 )

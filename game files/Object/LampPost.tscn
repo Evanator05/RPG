@@ -66,6 +66,7 @@ omni_range = 11.0
 omni_attenuation = 1.18921
 
 [node name="LampCage" type="MeshInstance" parent="."]
+transform = Transform( 0.999882, 0.00861383, 0.01274, -0.00863094, 0.999962, 0.00128815, -0.0127284, -0.00139795, 0.999918, 0, 0.0139632, 0 )
 mesh = ExtResource( 3 )
 material/0 = SubResource( 20 )
 
@@ -75,7 +76,7 @@ mesh = SubResource( 13 )
 material/0 = SubResource( 14 )
 
 [node name="orb" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97207, 0 )
 mesh = SubResource( 15 )
 material/0 = SubResource( 16 )
 

@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RPG"
-run/main_scene="res://Level.tscn"
+run/main_scene="res://Scenes/Menus/CharacterSelect.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -1,6 +1,5 @@
 extends StaticBody
 
-
 onready var spawnPos = get_node("SpawnPos")
 export var spawnRot = 0
 export var mapChunks = []
@@ -19,8 +18,6 @@ func _process(delta):
 	$LampCage.rotation_degrees.z = cos(-time*.5)*.5
 
 func interact(object):
-	Globals.playerSpawnPos = spawnPos.global_transform.origin
-	Globals.playerMapChunks = mapChunks
-	Globals.playerSpawnRot.y = spawnRot
+	Globals.savePlayer(Globals.playerName, spawnPos.global_transform.origin, Vector3(0,spawnRot,0), mapChunks)
+	
 	$activate.play()
-
