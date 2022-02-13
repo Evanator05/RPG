@@ -44,11 +44,11 @@ __meta__ = {
 anchor_left = 0.133
 anchor_top = 0.172
 anchor_right = 0.867
-anchor_bottom = 0.828
+anchor_bottom = 0.83
 margin_left = 0.639999
 margin_top = 0.23999
-margin_right = -0.640137
-margin_bottom = -0.240051
+margin_right = -0.640015
+margin_bottom = -0.400024
 custom_colors/guide_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -60,9 +60,9 @@ __meta__ = {
 }
 
 [node name="newCharacter" type="Button" parent="."]
-anchor_left = 0.367
+anchor_left = 0.167
 anchor_top = 0.859
-anchor_right = 0.467
+anchor_right = 0.267
 anchor_bottom = 0.919
 margin_left = -0.640015
 margin_top = 0.279968
@@ -73,6 +73,9 @@ custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/normal = SubResource( 5 )
 text = "New Character"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="newCharacter" to="." method="_on_newCharacter_pressed"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swordWhoosh.wav-de25077ebe21120f011c69342123583d.sample"
+
+[deps]
+
+source_file="res://Audio/SwordSwings/swordWhoosh.wav"
+dest_files=[ "res://.import/swordWhoosh.wav-de25077ebe21120f011c69342123583d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -26,11 +26,12 @@ func seperateByCapital(text): #seperate words based on capitals example "HelloWo
 	while true: 
 		for i in text.length(): #iterate on every letter in the word/sentence
 			if text[i] != " ": #if the letter is not a space
-				if text[i] == text[i].to_upper(): #if the letter is capitalized
-					text[i] = text[i].to_lower()
-					if text[i-1] != " ": #if the letter before is not a space
-						text = text.insert(i, " ") #add a space
-					break
+				if not text[i].is_valid_integer():
+					if text[i] == text[i].to_upper(): #if the letter is capitalized
+						text[i] = text[i].to_lower()
+						if text[i-1] != " ": #if the letter before is not a space
+							text = text.insert(i, " ") #add a space
+						break
 						
 		if text == text.to_lower():
 			break

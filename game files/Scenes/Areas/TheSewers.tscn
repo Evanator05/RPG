@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Materials/rock.png" type="Texture" id=1]
 [ext_resource path="res://Object/mapLoader.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Object/MovingPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Object/LiftLever.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Materials/wood.png" type="Texture" id=7]
+[ext_resource path="res://Object/Enemies/Sludge.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_world_triplanar = true
@@ -149,6 +150,51 @@ operation = 2
 width = 26.0
 height = 18.0
 depth = 62.0
+
+[node name="CSGBox7" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, -4, -44 )
+operation = 2
+height = 10.0
+depth = 10.0
+
+[node name="CSGBox8" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -4, 45 )
+operation = 2
+height = 10.0
+depth = 10.0
+
+[node name="CSGBox11" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -4, -82 )
+operation = 2
+height = 10.0
+depth = 10.0
+
+[node name="CSGBox13" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -4, -19 )
+operation = 2
+width = 10.0
+height = 10.0
+
+[node name="CSGBox9" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 20 )
+operation = 2
+width = 30.0
+height = 18.0
+depth = 76.0
+
+[node name="CSGBox12" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -56 )
+operation = 2
+width = 30.0
+height = 18.0
+depth = 72.0
+
+[node name="CSGBox10" type="CSGBox" parent="Section2/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, -62 )
+operation = 2
+width = 30.0
+height = 18.0
+depth = 74.0
 
 [node name="CSGBox3" type="CSGBox" parent="Section2/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 0, 77 )
@@ -323,59 +369,86 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 640, 3.
 [node name="Torch8" parent="Torches" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 640, 3.00006, 842 )
 
-[node name="mapUnloader" parent="." instance=ExtResource( 3 )]
+[node name="MapTriggers" type="Spatial" parent="."]
+
+[node name="mapUnloader" parent="MapTriggers" instance=ExtResource( 3 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 783 )
 mapId = 0
 
-[node name="mapLoader" parent="." instance=ExtResource( 2 )]
+[node name="mapLoader" parent="MapTriggers" instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 808 )
 mapId = 0
 
-[node name="mapUnloader2" parent="." instance=ExtResource( 3 )]
+[node name="mapUnloader2" parent="MapTriggers" instance=ExtResource( 3 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 873 )
 mapId = 0
 
-[node name="mapLoader2" parent="." instance=ExtResource( 2 )]
+[node name="mapLoader2" parent="MapTriggers" instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 854 )
 mapId = 0
 
-[node name="MovingPlatform" parent="." instance=ExtResource( 5 )]
+[node name="LiftsLevers" type="Spatial" parent="."]
+
+[node name="MovingPlatform" parent="LiftsLevers" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 874, -1, 907 )
 topPos = -1
 botPos = -200
 startTop = true
 maxSpeed = 25
 
-[node name="MeshInstance2" type="MeshInstance" parent="MovingPlatform"]
+[node name="MeshInstance2" type="MeshInstance" parent="LiftsLevers/MovingPlatform"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -126, 0 )
 mesh = SubResource( 3 )
 material/0 = null
 
-[node name="LiftLever" parent="." instance=ExtResource( 6 )]
+[node name="LiftLever" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 872, 1, 901 )
 lift = NodePath("../MovingPlatform")
 
-[node name="LiftLever2" parent="." instance=ExtResource( 6 )]
+[node name="LiftLever2" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 865.7, -198, 913 )
 lift = NodePath("../MovingPlatform")
 
-[node name="MovingPlatform2" parent="." instance=ExtResource( 5 )]
+[node name="MovingPlatform2" parent="LiftsLevers" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 834, -1, 811 )
 topPos = -1
 botPos = -200
 startTop = true
 maxSpeed = 25
 
-[node name="MeshInstance3" type="MeshInstance" parent="MovingPlatform2"]
+[node name="MeshInstance3" type="MeshInstance" parent="LiftsLevers/MovingPlatform2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -126, 0 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../../MovingPlatform")
 material/0 = null
 
-[node name="LiftLever3" parent="." instance=ExtResource( 6 )]
+[node name="LiftLever3" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, -3.82137e-15, 1, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 841, -196, 806.8 )
 lift = NodePath("../MovingPlatform2")
 
-[node name="LiftLever4" parent="." instance=ExtResource( 6 )]
+[node name="LiftLever4" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 832, 1, 805 )
 lift = NodePath("../MovingPlatform2")
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Sludge" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 716, 0.749997, 830 )
+
+[node name="Sludge2" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( -0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 736, 0.749997, 772 )
+
+[node name="Sludge3" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 751, 0.749997, 772 )
+
+[node name="Sludge4" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( 0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 771, 0.749997, 727 )
+
+[node name="Sludge5" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( -0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 827, 0.749997, 715 )
+
+[node name="Sludge6" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( -0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 861.966, 0.749997, 739.741 )
+
+[node name="Sludge7" parent="Enemies" instance=ExtResource( 8 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 883.192, 0.749997, 780.192 )

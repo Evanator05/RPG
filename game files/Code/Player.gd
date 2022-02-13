@@ -21,9 +21,10 @@ var gravityVector = Vector3()
 onready var head = $head
 onready var interactCast = $head/interactCast
 onready var ui = $UI
-
+onready var attackHitbox = $head/attackHitbox
 var health = 100
 
+var groundHeight = 0
 
 func _ready():
 	add_to_group("Player")
@@ -49,6 +50,13 @@ func _process(delta):
 	elif is_on_floor() and fullContact:
 		gravityVector = -get_floor_normal() * gravity
 		horizontalAcceleration = normalAcceleration
+		
+		#fall damage
+		var heightDiff = abs(groundHeight - global_transform.origin.y)
+		if heightDiff > 10:
+			takeDamage(heightDiff)
+		groundHeight = global_transform.origin.y
+		
 	else:
 		gravityVector = -get_floor_normal()
 
@@ -58,7 +66,7 @@ func _process(delta):
 	
 	var zdir = int(Input.is_action_pressed("moveBackwards")) - int(Input.is_action_pressed("moveForwards"))
 	var xdir = int(Input.is_action_pressed("moveRight")) - int(Input.is_action_pressed("moveLeft"))
-	
+	head.moving = xdir or zdir
 	direction += transform.basis.z*zdir
 	direction += transform.basis.x*xdir
 	
@@ -79,6 +87,24 @@ func _process(delta):
 		if collision != null:
 			if collision.is_in_group("interact"):
 				collision.interact(self)
+				
+	#attacking
+	if Input.is_action_just_pressed("attack"):
+		startAttacking()
+		
+func startAttacking():
+	$head/attackAnimations.play("axeSwing")
+	maxSpeed = 2
+
+func stopAttacking():
+	if not Input.is_action_pressed("attack"):
+		$head/attackAnimations.stop()
+		maxSpeed = 15
+
+func dealDamage(dmg:int):
+	for body in attackHitbox.get_overlapping_bodies():
+		if body.is_in_group("health"):
+			body.takeDamage(dmg)
 
 func takeDamage(damageAmount):
 	health -= damageAmount
