@@ -26,6 +26,8 @@ var health = 100
 
 var groundHeight = 0
 
+var inventory = []
+
 func _ready():
 	add_to_group("Player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -104,7 +106,7 @@ func stopAttacking():
 func dealDamage(dmg:int):
 	for body in attackHitbox.get_overlapping_bodies():
 		if body.is_in_group("health"):
-			body.takeDamage(dmg)
+			body.takeDamage(self, dmg)
 
 func takeDamage(damageAmount):
 	health -= damageAmount

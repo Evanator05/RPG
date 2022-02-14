@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/killSound.mp3-d5d311ec74dc1fdf6bcb61ba3e4c3637.mp3str"
+
+[deps]
+
+source_file="res://Audio/SwordSwings/killSound.mp3"
+dest_files=[ "res://.import/killSound.mp3-d5d311ec74dc1fdf6bcb61ba3e4c3637.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

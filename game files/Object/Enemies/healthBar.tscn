@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Code/Enemies/healthBar.gd" type="Script" id=1]
+[ext_resource path="res://Audio/SwordSwings/killSound.mp3" type="AudioStream" id=2]
 
 [sub_resource type="QuadMesh" id=7]
 size = Vector2( 3, 0.25 )
@@ -39,3 +40,7 @@ custom_styles/fg = SubResource( 10 )
 custom_styles/bg = SubResource( 11 )
 value = 50.0
 percent_visible = false
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 2 )
+unit_size = 5.0
