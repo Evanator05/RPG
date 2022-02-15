@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Materials/orb.png" type="Texture" id=1]
 [ext_resource path="res://Materials/rock.png" type="Texture" id=2]
-[ext_resource path="res://Models/LampCage.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Models/Weapons/LampCage.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Code/LampPost.gd" type="Script" id=4]
 [ext_resource path="res://Audio/Lamps/activate.wav" type="AudioStream" id=5]
 

@@ -5,7 +5,7 @@
 [ext_resource path="res://Code/Maps.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Areas/TheSewers.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MapEnvironments/Night.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Object/LampPost.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/LampPost.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Code/Level.gd" type="Script" id=7]
 
 [node name="Level" type="Spatial"]

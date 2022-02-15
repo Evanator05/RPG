@@ -21,10 +21,7 @@ func _process(delta):
 		"alive":
 			alive(delta)
 		"attack":
-			if not $AnimationPlayer.is_playing():
-				state = "alive"
-			var angle = getAngleTo(trackingPos)
-			rotation.y = lerp_angle(rotation.y, -angle-deg2rad(90), 1 - pow(0.08, delta))
+			attack(delta)
 		"dead":
 			movement = Vector3()
 			if not $AnimationPlayer.is_playing():
@@ -52,7 +49,17 @@ func alive(delta):
 			trackingPos = null
 			movement.x = 0
 			movement.z = 0
-			
+
+func attack(delta):
+
+	if not $AnimationPlayer.is_playing():
+		state = "alive"
+	for body in $vision.get_overlapping_bodies():
+		if body.is_in_group("Player"):
+			findLocation(body)
+	var angle = getAngleTo(trackingPos)
+	rotation.y = lerp_angle(rotation.y, -angle-deg2rad(90), 1 - pow(0.08, delta))
+
 func dealDamage(dmg):
 	for body in $hitbox.get_overlapping_bodies():
 		if body.is_in_group("Player"):
@@ -62,7 +69,7 @@ func takeDamage(dealer, dmg):
 	if health > 0:
 		findLocation(dealer)
 		health -= dmg
-		healthBar.updateBar(health, maxHealth)
+		healthBar.updateBar(health)
 		if health <= 0:
 			die()
 		else:

@@ -5,17 +5,15 @@ func _ready():
 
 func addCharactersToList():
 	var characters = Globals.getSaves()
+	print(characters)
 	for c in characters:
 		Globals.loadPlayer(c)
 		var text = c + "   I   " + Globals.mapIds[Globals.playerMapChunks[0]]
-		
 		text = seperateByCapital(text)
-		
 		for i in text.length(): #recapitalize each word
 			if text[i-1] == " ":
 				text[i] = text[i].to_upper()
 		text[0] = text[0].to_upper()
-			
 		$ItemList.add_item(text)
 
 func _on_ItemList_item_selected(index):

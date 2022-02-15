@@ -5,14 +5,17 @@ var mapIds = ["TheHub", "TheForest", "TheSewers"]
 var player
 var playerSpawnPos
 var playerSpawnRot
-var playerMapChunks
+var playerMapChunks = []
 var playerName
 
 func _ready():
-	pass
+	#create folders
+	var dir = Directory.new()
+	dir.open("user://")
+	dir.make_dir("Characters")
 
 func getSaves():
-	var characters = []
+	var c = []
 	var dir = Directory.new()
 	dir.open("user://Characters")
 	dir.list_dir_begin()
@@ -22,11 +25,11 @@ func getSaves():
 		if file == "":
 			break
 		elif not file.begins_with("."):
-			characters.append(file)
+			c.append(file)
 
 	dir.list_dir_end()
 
-	return characters
+	return c
 
 func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChunks:Array):
 	#create folders
