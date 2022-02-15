@@ -22,18 +22,25 @@ onready var head = $head
 onready var interactCast = $head/interactCast
 onready var ui = $UI
 onready var attackHitbox = $head/attackHitbox
+
+var maxHealth = 100
 var health = 100
 
 var groundHeight = 0
 
 var inventory = []
+var healths = 3
+
+var damage = 5
+var attackAnimation = ""
+var weapon = "Axe"
 
 func _ready():
 	add_to_group("Player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ui.updateUI(health)
+	updateWeapon(weapon)
 	
-
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouseSensitivity))
@@ -43,7 +50,6 @@ func _input(event):
 
 func _process(delta):
 	direction = Vector3()
-
 	fullContact = $floorCast.is_colliding()
 	
 	if not is_on_floor():
@@ -55,8 +61,8 @@ func _process(delta):
 		
 		#fall damage
 		var heightDiff = abs(groundHeight - global_transform.origin.y)
-		if heightDiff > 10:
-			takeDamage(heightDiff)
+		if heightDiff > 20:
+			takeDamage(pow((heightDiff-15),2))
 		groundHeight = global_transform.origin.y
 		
 	else:
@@ -89,11 +95,25 @@ func _process(delta):
 		if collision != null:
 			if collision.is_in_group("interact"):
 				collision.interact(self)
-				
+	
+	#healing
+	if Input.is_action_just_pressed("heal") and healths > 0:
+		heal(100)
+		healths -= 1
+	
 	#attacking
 	if Input.is_action_just_pressed("attack"):
 		startAttacking()
-		
+
+func updateWeapon(weaponName:String):
+	var weapon = WeaponManager.items["items"][weaponName]
+	damage = weapon["damage"]
+	for child in $head/hand/Weapon.get_children():
+		child.queue_free()
+	var weaponInst = load(weapon["model"]).instance()
+	weaponInst.translation = weapon["position"]
+	$head/hand/Weapon.add_child(weaponInst)
+
 func startAttacking():
 	$head/attackAnimations.play("axeSwing")
 	maxSpeed = 2
@@ -103,17 +123,23 @@ func stopAttacking():
 		$head/attackAnimations.stop()
 		maxSpeed = 15
 
-func dealDamage(dmg:int):
+func dealDamage(multiplier:int):
 	for body in attackHitbox.get_overlapping_bodies():
 		if body.is_in_group("health"):
-			body.takeDamage(self, dmg)
+			body.takeDamage(self, damage*multiplier)
 
 func takeDamage(damageAmount):
 	health -= damageAmount
+	print(damageAmount)
 	ui.updateHealthBar(health)
 	if health <= 0:
 		die()
-		
+
+func heal(healAmount):
+	health += healAmount
+	health = clamp(health, 0, maxHealth)
+	ui.updateHealthBar(health)
+	
 func die():
 	Globals.loadPlayer(Globals.playerName)
 	get_tree().reload_current_scene()

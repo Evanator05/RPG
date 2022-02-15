@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Code/Enemies/Sludge.gd" type="Script" id=1]
-[ext_resource path="res://Object/Enemies/healthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Enemies/healthBar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 1.5
@@ -376,7 +376,7 @@ skeleton = NodePath("../..")
 material/0 = null
 
 [node name="rArm" type="MeshInstance" parent="body"]
-transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.54107, 0, -0.388266, 1.87432, 1, 1.6, -1.29999 )
+transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.541069, 0, -0.388265, 1.87432, 1, 1.6, -1.29999 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = null
@@ -388,7 +388,7 @@ skeleton = NodePath("../../..")
 material/0 = null
 
 [node name="lArm" type="MeshInstance" parent="body"]
-transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.54107, 0, -0.388266, 1.87432, -1, 1.6, -1.29999 )
+transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.541069, 0, -0.388265, 1.87432, -1, 1.6, -1.29999 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = null
@@ -402,6 +402,7 @@ material/0 = null
 [node name="healthBar" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 material/0 = SubResource( 8 )
+maxHealth = 30
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )

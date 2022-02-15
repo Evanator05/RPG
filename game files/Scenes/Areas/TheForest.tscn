@@ -9,8 +9,8 @@
 [ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://MapData/TheForest/TheForest_slot0_albedo_bump.packed_tex" type="Texture" id=8]
 [ext_resource path="res://MapData/TheForest/TheForest_slot1_albedo_bump.packed_tex" type="Texture" id=9]
-[ext_resource path="res://Object/mapLoader.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Object/mapUnloader.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/mapLoader.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/mapUnloader.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 1 )

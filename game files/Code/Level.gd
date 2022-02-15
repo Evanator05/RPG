@@ -1,6 +1,6 @@
 extends Spatial
 
-var player = preload("res://Object/Player.tscn")
+var player = preload("res://Objects/Player.tscn")
 
 func _ready():
 	Globals.maps = $Maps
