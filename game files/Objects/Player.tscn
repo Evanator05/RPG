@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Code/head.gd" type="Script" id=1]
 [ext_resource path="res://Code/Player.gd" type="Script" id=2]
 [ext_resource path="res://Code/UI.gd" type="Script" id=3]
 [ext_resource path="res://Audio/SwordSwings/swordWhoosh.wav" type="AudioStream" id=4]
-[ext_resource path="res://Models/Weapons/Scenes/Axe.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Models/Weapons/Scenes/Knife.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=2]
 height = 2.0
@@ -14,6 +14,106 @@ height = 1.0
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1, 1, 2 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "KnifeSwing"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 0.9, 1.1, 1.2, 1.4, 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 4.59479, 1, 5.09824, 1, 6.49801, 1, 5.09824, 1, 6.49801, 1 ),
+"update": 0,
+"values": [ Vector3( 0.293, -0.178, -0.302 ), Vector3( 0.31, -0.159, -0.312 ), Vector3( -0.184, -0.22, -0.312 ), Vector3( -0.184, -0.307, -0.349 ), Vector3( 0.313, -0.243, -0.329 ), Vector3( 0.225, -0.113, -0.361 ), Vector3( -0.228, -0.149, -0.394 ), Vector3( -0.184, -0.307, -0.349 ), Vector3( 0.313, -0.243, -0.329 ), Vector3( 0.225, -0.113, -0.361 ), Vector3( -0.228, -0.149, -0.394 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 0.9, 1.1, 1.2, 1.4, 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 4.59479, 1, 5.09824, 1, 6.49801, 1, 5.09824, 1, 6.49801, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -3.913, 0 ), Vector3( 5.418, -3.913, 0 ), Vector3( -20, 45, -30 ), Vector3( -20, 45, 30 ), Vector3( -20, -30, 30 ), Vector3( 20, -5, -40 ), Vector3( 0, 60, -90 ), Vector3( -20, 45, 30 ), Vector3( -20, -30, 30 ), Vector3( 20, -5, -40 ), Vector3( 0, 60, -90 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.4, 0.7, 0.8, 1, 1.1, 1.3, 1.4, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 1 ],
+"method": "dealDamage"
+}, {
+"args": [  ],
+"method": "stopAttacking"
+}, {
+"args": [ 1 ],
+"method": "dealDamage"
+}, {
+"args": [  ],
+"method": "stopAttacking"
+}, {
+"args": [ 1 ],
+"method": "dealDamage"
+}, {
+"args": [  ],
+"method": "stopAttacking"
+}, {
+"args": [ 1 ],
+"method": "dealDamage"
+}, {
+"args": [  ],
+"method": "stopAttacking"
+}, {
+"args": [ 1 ],
+"method": "dealDamage"
+}, {
+"args": [  ],
+"method": "stopAttacking"
+} ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("hand/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0.3, 0.7, 1, 1.3, 1.6 )
+}
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -188,6 +288,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.8 )
 shape = SubResource( 7 )
 
 [node name="attackAnimations" type="AnimationPlayer" parent="head"]
+anims/KnifeSwing = SubResource( 18 )
 anims/RESET = SubResource( 11 )
 anims/axeSwing = SubResource( 10 )
 
@@ -196,7 +297,8 @@ transform = Transform( 0.997669, 0, -0.0682417, 0, 1, 0, 0.0682417, 0, 0.997669,
 
 [node name="Weapon" type="Spatial" parent="head/hand"]
 
-[node name="Axe" parent="head/hand/Weapon" instance=ExtResource( 5 )]
+[node name="Knife" parent="head/hand/Weapon" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, 0, 0, 0 )
 
 [node name="hand" type="MeshInstance" parent="head/hand"]
 transform = Transform( 0.997671, 0, 0.0682418, 0, 1, 0, -0.0682418, 0, 0.997671, 0.00712055, -0.022, 0.00151715 )
@@ -264,6 +366,29 @@ margin_bottom = 32.0
 custom_styles/fg = SubResource( 5 )
 custom_styles/bg = SubResource( 6 )
 value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Control" parent="UI"]
+anchor_left = 0.767
+anchor_top = 0.059
+anchor_right = 0.967
+anchor_bottom = 0.948
+margin_left = -0.640015
+margin_top = 0.279995
+margin_right = -0.640137
+margin_bottom = 0.159912
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="UI/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="screenFade" type="ColorRect" parent="UI"]
 anchor_right = 1.0

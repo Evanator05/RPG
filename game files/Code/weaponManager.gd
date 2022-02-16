@@ -15,7 +15,7 @@ var items = {
 			"description": "crewmer",
 			"model": "res://Models/Weapons/Scenes/Knife.tscn",
 			"position": Vector3(0, 0, 0),
-			"animations": "axeSwing",
+			"animations": "KnifeSwing",
 			"damage": 2
 			}
 			 
