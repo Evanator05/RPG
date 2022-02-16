@@ -3,19 +3,20 @@ extends Control
 var fadeAmount = 0
 
 onready var healthBar = $HealthBar/ProgressBar
+onready var itemList = $Inventory/ItemList
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$screenFade.color.a = lerp($screenFade.color.a, fadeAmount, 1 - pow(0.5,delta))
 
-func updateUI(health):
+func updateUI(health:int, inventory:Array):
 	updateHealthBar(health)
-
-func updateHealthBar(amount):
+	updateInventory(inventory)
+	
+func updateHealthBar(amount:int):
 	healthBar.value = amount
+
+func updateInventory(inventory:Array):
+	for i in itemList.items:
+		itemList.remove_item(0)
+	for item in inventory:
+		itemList.add_item(item)

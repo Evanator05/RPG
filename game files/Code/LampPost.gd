@@ -18,6 +18,6 @@ func _process(delta):
 	$LampCage.rotation_degrees.z = cos(-time*.5)*.5
 
 func interact(object):
-	Globals.savePlayer(Globals.playerName, spawnPos.global_transform.origin, Vector3(0,spawnRot,0), mapChunks)
+	Globals.savePlayer(Globals.playerName, spawnPos.global_transform.origin, Vector3(0,spawnRot,0), mapChunks, object.inventory)
 	
 	$activate.play()

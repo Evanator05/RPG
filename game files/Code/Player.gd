@@ -31,15 +31,16 @@ var groundHeight = 0
 var inventory = []
 var healths = 3
 
-var damage = 5
+var damage = 1
 var attackAnimation = ""
 var weapon = "Axe"
 
 func _ready():
 	add_to_group("Player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	ui.updateUI(health)
-	updateWeapon(weapon)
+	inventory = Globals.player["inventory"]
+	ui.updateUI(health, inventory)
+	updateWeapon(inventory[0])
 	
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -108,6 +109,7 @@ func _process(delta):
 func updateWeapon(weaponName:String):
 	var weapon = WeaponManager.items["items"][weaponName]
 	damage = weapon["damage"]
+	attackAnimation = weapon["animations"]
 	for child in $head/hand/Weapon.get_children():
 		child.queue_free()
 	var weaponInst = load(weapon["model"]).instance()
@@ -115,7 +117,7 @@ func updateWeapon(weaponName:String):
 	$head/hand/Weapon.add_child(weaponInst)
 
 func startAttacking():
-	$head/attackAnimations.play("axeSwing")
+	$head/attackAnimations.play(attackAnimation)
 	maxSpeed = 2
 
 func stopAttacking():

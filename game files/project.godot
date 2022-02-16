@@ -30,6 +30,10 @@ config/name="RPG"
 run/main_scene="res://Scenes/Menus/CharacterSelect.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [autoload]
 
 Globals="*res://Code/globals.gd"

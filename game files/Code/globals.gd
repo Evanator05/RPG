@@ -31,7 +31,7 @@ func getSaves():
 
 	return c
 
-func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChunks:Array):
+func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChunks:Array, playerInventory:Array):
 	#create folders
 	var dir = Directory.new()
 	dir.open("user://")
@@ -43,15 +43,16 @@ func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChu
 	#save player data
 	var file = File.new()
 	file.open("user://Characters/" + characterName + "/playerPosition.json", File.WRITE)
-	file.store_var(makePlayerJson(spawnPos, spawnRot, mapChunks))
+	file.store_var(makePlayerJson(spawnPos, spawnRot, mapChunks, playerInventory))
 	file.close()
 	
-func makePlayerJson(spawnPos, spawnRot, mapChunks):
+func makePlayerJson(spawnPos, spawnRot, mapChunks, playerInventory):
 	var data = {
 		"Player": {
 			"spawnPos": spawnPos,
 			"spawnRot": spawnRot,
-			"mapChunks": mapChunks
+			"mapChunks": mapChunks,
+			"inventory": playerInventory
 		}
 	}
 	return data
@@ -69,5 +70,5 @@ func loadPlayer(characterName):
 		playerSpawnRot = json.Player.spawnRot
 		playerMapChunks = json.Player.mapChunks
 		
-		player = json
+		player = json.Player
 
