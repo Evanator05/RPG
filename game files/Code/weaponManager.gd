@@ -17,7 +17,10 @@ var items = {
 			"position": Vector3(0, 0, 0),
 			"animations": "KnifeSwing",
 			"damage": 2
-			}
+			},
+		"Nothing": {
+			"type": "nada"
+		}
 			 
 	}
 }

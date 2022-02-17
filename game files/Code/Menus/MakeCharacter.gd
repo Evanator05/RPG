@@ -2,7 +2,7 @@ extends Control
 
 onready var playerName = $Name
 
-var classes = [["Axe"], ["Knife"]]
+var classes = [["Axe"], ["Knife"], ["Axe", "Knife", "Nothing"]]
 
 func createCharacter(pName:String):
 	Globals.savePlayer(pName, Vector3(311,2,274), Vector3(0,90,0), [1], classes[$OptionButton.selected])

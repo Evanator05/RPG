@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Code/UI/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Roboto-Black.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Objects/UI/inventoryTab.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=19]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[node name="Inventory" type="Control"]
+anchor_left = 0.767
+anchor_top = 0.059
+anchor_right = 0.967
+anchor_bottom = 0.948
+margin_left = -0.640015
+margin_top = 0.279991
+margin_right = -0.640137
+margin_bottom = 0.159912
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="."]
+anchor_top = 0.067
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.32
+margin_right = 0.00012207
+margin_bottom = 6.10352e-05
+custom_colors/guide_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_constants/vseparation = 16
+custom_constants/line_separation = 32
+custom_constants/hseparation = 64
+custom_fonts/font = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weapons" parent="." instance=ExtResource( 5 )]
+anchor_right = 0.167
+anchor_bottom = 0.067
+margin_right = -0.127983
+margin_bottom = -0.32
+
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]

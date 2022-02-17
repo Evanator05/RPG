@@ -9,7 +9,7 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=19]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -59,7 +59,7 @@ margin_left = -0.640015
 margin_top = -0.520004
 margin_right = 0.640015
 margin_bottom = -0.480011
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 19 )
 align = 1
 placeholder_text = "Name"
 
@@ -84,8 +84,9 @@ margin_left = -0.640015
 margin_top = 0.039978
 margin_right = 0.640015
 margin_bottom = 0.399994
-custom_fonts/font = SubResource( 2 )
-items = [ "Axe", null, false, 0, null, "Knife", null, false, 1, null ]
+custom_fonts/font = SubResource( 19 )
+text = "Axe"
+items = [ "Axe", null, false, 0, null, "Knife", null, false, 1, null, "Both", null, false, 2, null ]
 selected = 0
 
 [node name="error" type="Label" parent="."]

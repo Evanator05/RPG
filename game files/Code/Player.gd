@@ -43,10 +43,11 @@ func _ready():
 	updateWeapon(inventory[0])
 	
 func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg2rad(-event.relative.x * mouseSensitivity))
-		head.rotate_x(deg2rad(-event.relative.y * mouseSensitivity))
-		head.rotation.x = clamp(head.rotation.x, deg2rad(-79), deg2rad(79))
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseMotion:
+			rotate_y(deg2rad(-event.relative.x * mouseSensitivity))
+			head.rotate_x(deg2rad(-event.relative.y * mouseSensitivity))
+			head.rotation.x = clamp(head.rotation.x, deg2rad(-79), deg2rad(79))
 	
 
 func _process(delta):
@@ -132,7 +133,7 @@ func dealDamage(multiplier:int):
 
 func takeDamage(damageAmount):
 	health -= damageAmount
-	print(damageAmount)
+
 	ui.updateHealthBar(health)
 	if health <= 0:
 		die()
@@ -141,7 +142,7 @@ func heal(healAmount):
 	health += healAmount
 	health = clamp(health, 0, maxHealth)
 	ui.updateHealthBar(health)
-	
+
 func die():
 	Globals.loadPlayer(Globals.playerName)
 	get_tree().reload_current_scene()

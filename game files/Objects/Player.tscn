@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Code/head.gd" type="Script" id=1]
 [ext_resource path="res://Code/Player.gd" type="Script" id=2]
 [ext_resource path="res://Code/UI.gd" type="Script" id=3]
 [ext_resource path="res://Audio/SwordSwings/swordWhoosh.wav" type="AudioStream" id=4]
 [ext_resource path="res://Models/Weapons/Scenes/Knife.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/UI/Inventory.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=2]
 height = 2.0
@@ -350,6 +351,9 @@ margin_top = -1.0
 margin_right = 1.0
 margin_bottom = 1.0
 color = Color( 1, 1, 1, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HealthBar" type="Control" parent="UI"]
 margin_right = 40.0
@@ -370,27 +374,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" type="Control" parent="UI"]
-anchor_left = 0.767
-anchor_top = 0.059
-anchor_right = 0.967
-anchor_bottom = 0.948
-margin_left = -0.640015
-margin_top = 0.279995
-margin_right = -0.640137
-margin_bottom = 0.159912
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ItemList" type="ItemList" parent="UI/Inventory"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Inventory" parent="UI" instance=ExtResource( 6 )]
+visible = false
 
 [node name="screenFade" type="ColorRect" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )

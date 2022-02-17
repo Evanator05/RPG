@@ -5,7 +5,7 @@ func _ready():
 
 func addCharactersToList():
 	var characters = Globals.getSaves()
-	print(characters)
+
 	for c in characters:
 		Globals.loadPlayer(c)
 		var text = c + "   I   " + Globals.mapIds[Globals.playerMapChunks[0]]
