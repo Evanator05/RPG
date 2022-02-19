@@ -5,7 +5,7 @@ var inventoryType = "weapon"
 onready var itemList = $ItemList
 onready var player = get_parent().player
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("inventory"):
 		toggleInventory()
 
@@ -15,6 +15,8 @@ func updateInventory(inventory:Array, type:String):
 	for item in inventory:
 		if WeaponManager.items["items"][item]["type"] == type:
 			itemList.add_item(item)
+			var icon = load(WeaponManager.items["items"][item]["icon"])
+			itemList.set_item_icon(itemList.get_item_count()-1,icon)
 
 func toggleInventory():
 	visible = not visible

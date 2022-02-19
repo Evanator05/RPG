@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Areas/TheHub.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Areas/TheForest.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://MapEnvironments/Night.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/LampPost.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Code/Level.gd" type="Script" id=7]
+[ext_resource path="res://Materials/GrayBricks.tres" type="Material" id=8]
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 7 )
@@ -19,6 +20,43 @@ script = ExtResource( 3 )
 [node name="TheHub" parent="Maps" instance=ExtResource( 1 )]
 
 [node name="TheSewers" parent="Maps" instance=ExtResource( 4 )]
+
+[node name="TheDepths" type="Spatial" parent="Maps"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Maps/TheDepths"]
+material_override = ExtResource( 8 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="Maps/TheDepths/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 684, -189, 1039 )
+width = 100.0
+height = 30.0
+depth = 54.0
+material = ExtResource( 8 )
+
+[node name="CSGBox2" type="CSGBox" parent="Maps/TheDepths/CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, -5, -25 )
+operation = 2
+width = 10.0
+height = 10.0
+depth = 4.0
+material = ExtResource( 8 )
+
+[node name="CSGBox3" type="CSGBox" parent="Maps/TheDepths/CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -4, -9 )
+operation = 2
+width = 52.0
+height = 12.0
+depth = 28.0
+material = ExtResource( 8 )
+
+[node name="TheCity" type="Spatial" parent="Maps"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Maps/TheCity"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 31, 724 )
+
+[node name="SpawnPos2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 299, 2.1, 274 )
 
 [node name="Environment" type="Spatial" parent="."]
 
@@ -34,12 +72,9 @@ mapChunks = [ 0, 1 ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
 
 [node name="LampPost3" parent="LampPosts" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, -0.999998, 274 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 297, -1.99951, 274 )
 spawnRot = 90
 mapChunks = [ 1 ]
 
 [node name="SpawnPos" type="Position3D" parent="LampPosts/LampPost3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0 )
-
-[node name="SpawnPos2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 311, 2, 274 )

@@ -1,56 +1,152 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Materials/orb.png" type="Texture" id=1]
-[ext_resource path="res://Materials/rock.png" type="Texture" id=2]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-ao.png" type="Texture" id=2]
 [ext_resource path="res://Models/Weapons/LampCage.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Code/LampPost.gd" type="Script" id=4]
 [ext_resource path="res://Audio/Lamps/activate.wav" type="AudioStream" id=5]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-albedo.png" type="Texture" id=6]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-height.png" type="Texture" id=7]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-metalness.png" type="Texture" id=8]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-normal.png" type="Texture" id=9]
+[ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-roughness.png" type="Texture" id=10]
 
 [sub_resource type="CylinderShape" id=12]
 height = 4.0
 
 [sub_resource type="SpatialMaterial" id=20]
-albedo_texture = ExtResource( 2 )
-uv1_scale = Vector3( 0.2, 0.2, 0.2 )
-uv1_triplanar = true
+albedo_texture = ExtResource( 6 )
+metallic_texture = ExtResource( 8 )
+roughness_texture = ExtResource( 10 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 9 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 2 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 7 )
+
+[sub_resource type="Shader" id=22]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float Glow_Power : hint_range(0,10) = 3;
+uniform float Lightness_Difference : hint_range(0,10) = 3;
+uniform vec4 Sun_Color : hint_color;
+
+uniform sampler2D voronoi_noise;
+uniform sampler2D emission_noise;
+varying vec3 vertex_pos;
+uniform float waveSpeed : hint_range(0,1) = 0.1;
+uniform float fresnel : hint_range(0,2) = 1.0;
+
+uniform float scale : hint_range(0,2) = 0.01;
+uniform float blendSharpness : hint_range(0,2) = 0.0;
+
+// TRIPLANAR FUNCTION
+vec4 triplanar_texture(vec3 position, vec3 normal, vec2 offset, sampler2D noise) {
+	vec4 colX = texture(noise, position.xy * scale + offset);
+	vec4 colY = texture(noise, position.xz * scale + offset);
+	vec4 colZ = texture(noise, position.zy * scale + offset);
+	
+	vec3 blendWeight = abs(normal);
+	blendWeight = vec3(pow(blendWeight.x, blendSharpness), pow(blendWeight.y, blendSharpness), pow(blendWeight.z, blendSharpness));
+	blendWeight /= (blendWeight.x + blendWeight.y + blendWeight.z);
+	
+	return colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
+}
+
+void vertex() {
+	vertex_pos = VERTEX;
+}
+
+void fragment() {
+	ALBEDO = vec3(0,0,0);
+	// Fresnel
+	float fresnel_out = pow(fresnel - clamp(dot(NORMAL, VIEW), 0.0, fresnel), fresnel);
+
+	vec2 waveOffsetA = vec2(TIME * waveSpeed, TIME * waveSpeed * 0.8);
+	vec2 waveOffsetB = vec2(TIME * waveSpeed * - 0.8, TIME * waveSpeed * -0.3);
+	vec2 result_offset = waveOffsetA + waveOffsetB;
+
+	vec3 cloud_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, voronoi_noise).rgb;
+	vec3 cloud_tex_with_light = cloud_tex * vec3(Lightness_Difference);
+	vec3 cloud_tex_with_light_with_color = cloud_tex_with_light * Sun_Color.rgb;
+	vec3 cloud_tex_with_light_with_color_with_glow = vec3(Glow_Power) * cloud_tex_with_light_with_color;
+
+	vec3 noise_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, emission_noise).rgb;
+	vec3 result = cloud_tex_with_light_with_color_with_glow * noise_tex;
+
+	EMISSION = vec3(fresnel_out) * result;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=24]
+period = 218.7
+persistence = 0.255
+lacunarity = 1.34
+
+[sub_resource type="NoiseTexture" id=25]
+seamless = true
+noise = SubResource( 24 )
+
+[sub_resource type="OpenSimplexNoise" id=26]
+period = 42.7
+
+[sub_resource type="NoiseTexture" id=27]
+seamless = true
+noise = SubResource( 26 )
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 22 )
+shader_param/Glow_Power = 0.824
+shader_param/Lightness_Difference = 2.88
+shader_param/Sun_Color = Color( 1, 0, 0, 1 )
+shader_param/waveSpeed = 0.5
+shader_param/fresnel = 1.197
+shader_param/scale = 2.0
+shader_param/blendSharpness = 2.0
+shader_param/voronoi_noise = SubResource( 27 )
+shader_param/emission_noise = SubResource( 25 )
 
 [sub_resource type="CylinderMesh" id=13]
+material = SubResource( 28 )
 bottom_radius = 0.1
 height = 1000.0
 
-[sub_resource type="SpatialMaterial" id=14]
-flags_unshaded = true
-albedo_color = Color( 1, 0, 0, 1 )
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/Glow_Power = 0.824
+shader_param/Lightness_Difference = 2.88
+shader_param/Sun_Color = Color( 1, 0, 0, 1 )
+shader_param/waveSpeed = 0.299
+shader_param/fresnel = 0.6
+shader_param/scale = 2.0
+shader_param/blendSharpness = 2.0
+shader_param/voronoi_noise = SubResource( 27 )
+shader_param/emission_noise = SubResource( 25 )
 
-[sub_resource type="QuadMesh" id=15]
-
-[sub_resource type="SpatialMaterial" id=16]
-render_priority = 1
-flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 1
-albedo_color = Color( 1, 0, 0, 1 )
-albedo_texture = ExtResource( 1 )
+[sub_resource type="SphereMesh" id=21]
+material = SubResource( 23 )
+radius = 0.5
+height = 1.0
 
 [sub_resource type="ParticlesMaterial" id=17]
 emission_shape = 2
 emission_box_extents = Vector3( 0.4, 0, 0.4 )
 gravity = Vector3( 0, 1, 0 )
 
-[sub_resource type="SpatialMaterial" id=18]
-render_priority = 1
-flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 1
-albedo_color = Color( 1, 0, 0, 1 )
-albedo_texture = ExtResource( 1 )
-
-[sub_resource type="QuadMesh" id=19]
-material = SubResource( 18 )
-size = Vector2( 0.1, 0.1 )
+[sub_resource type="SphereMesh" id=29]
+material = SubResource( 28 )
+radius = 0.02
+height = 0.04
 
 [node name="LampPost" type="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 355, -0.9, 784 )
 script = ExtResource( 4 )
 spawnRot = 180
 
@@ -61,9 +157,8 @@ shape = SubResource( 12 )
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 light_color = Color( 1, 0, 0, 1 )
-light_energy = 8.0
 omni_range = 11.0
-omni_attenuation = 1.18921
+omni_attenuation = 1.51572
 
 [node name="LampCage" type="MeshInstance" parent="."]
 transform = Transform( 0.999882, 0.00861383, 0.01274, -0.00863094, 0.999962, 0.00128815, -0.0127284, -0.00139795, 0.999918, 0, 0.0139632, 0 )
@@ -73,19 +168,19 @@ material/0 = SubResource( 20 )
 [node name="beam" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 504, 0 )
 mesh = SubResource( 13 )
-material/0 = SubResource( 14 )
+material/0 = null
 
 [node name="orb" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97207, 0 )
-mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+mesh = SubResource( 21 )
+material/0 = null
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 lifetime = 1.3
 visibility_aabb = AABB( -0.8, -1, -0.8, 1.6, 2, 1.6 )
 process_material = SubResource( 17 )
-draw_pass_1 = SubResource( 19 )
+draw_pass_1 = SubResource( 29 )
 
 [node name="activate" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )

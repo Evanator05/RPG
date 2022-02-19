@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 512,
+	"src": {
+		"a": "res://Materials/Textures/Pine Forest Ground/pine_forest_ground1_Roughness.png",
+		"rgb": "res://Materials/Textures/Pine Forest Ground/pine_forest_ground1_Normal-ogl.png"
+	}
+}

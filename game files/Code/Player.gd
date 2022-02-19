@@ -39,7 +39,7 @@ func _ready():
 	add_to_group("Player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	inventory = Globals.player["inventory"]
-	ui.updateUI(health, inventory)
+	ui.updateUI(health)
 	updateWeapon(inventory[0])
 	
 func _input(event):
@@ -92,10 +92,12 @@ func _process(delta):
 	move_and_slide(movement, Vector3.UP)
 	
 	#interacting
-	if Input.is_action_just_pressed("interact"):
-		var collision = interactCast.get_collider()
-		if collision != null:
-			if collision.is_in_group("interact"):
+	ui.setCrosshair(false)
+	var collision = interactCast.get_collider()
+	if collision != null:
+		if collision.is_in_group("interact"):
+			ui.setCrosshair(true)
+			if Input.is_action_just_pressed("interact"):
 				collision.interact(self)
 	
 	#healing
@@ -108,7 +110,7 @@ func _process(delta):
 		startAttacking()
 
 func updateWeapon(weaponName:String):
-	var weapon = WeaponManager.items["items"][weaponName]
+	weapon = WeaponManager.items["items"][weaponName]
 	damage = weapon["damage"]
 	attackAnimation = weapon["animations"]
 	for child in $head/hand/Weapon.get_children():
@@ -145,4 +147,4 @@ func heal(healAmount):
 
 func die():
 	Globals.loadPlayer(Globals.playerName)
-	get_tree().reload_current_scene()
+	var scene = get_tree().reload_current_scene()

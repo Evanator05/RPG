@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Code/UI/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://Materials/UI/weaponsIcon.png" type="Texture" id=2]
+[ext_resource path="res://Materials/UI/keyIcon.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/Roboto-Black.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Objects/UI/inventoryTab.tscn" type="PackedScene" id=5]
 
@@ -37,14 +39,30 @@ custom_constants/vseparation = 16
 custom_constants/line_separation = 32
 custom_constants/hseparation = 64
 custom_fonts/font = SubResource( 19 )
+icon_scale = 0.4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="weapons" parent="." instance=ExtResource( 5 )]
-anchor_right = 0.167
+anchor_left = 0.167
+anchor_right = 0.333
 anchor_bottom = 0.067
-margin_right = -0.127983
-margin_bottom = -0.32
+margin_left = -0.127983
+margin_top = 7.62939e-06
+margin_right = 0.128029
+margin_bottom = -0.319992
+texture_normal = ExtResource( 2 )
+
+[node name="keys" parent="." instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_right = 0.667
+anchor_bottom = 0.067
+margin_left = 6.10352e-05
+margin_top = 7.62939e-06
+margin_right = -0.12793
+margin_bottom = -0.319992
+texture_normal = ExtResource( 3 )
+tab = "key"
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]

@@ -8,7 +8,8 @@ var items = {
 			"model": "res://Models/Weapons/Scenes/Axe.tscn",
 			"position": Vector3(0, 0.04, 0),
 			"animations": "axeSwing",
-			"damage": 5
+			"damage": 5,
+			"icon": "res://Materials/UI/weaponsIcon.png"
 			},
 		"Knife": {
 			"type": "weapon",
@@ -16,11 +17,17 @@ var items = {
 			"model": "res://Models/Weapons/Scenes/Knife.tscn",
 			"position": Vector3(0, 0, 0),
 			"animations": "KnifeSwing",
-			"damage": 2
+			"damage": 2,
+			"icon": "res://Materials/UI/keyIcon.png"
 			},
-		"Nothing": {
-			"type": "nada"
+		
+		"Church Key": {
+			"type": "key",
+			"icon": "res://Materials/UI/keyIcon.png"
 		}
+		
+		
+		
 			 
 	}
 }

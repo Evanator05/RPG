@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Models/Weapons/Axe.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Materials/wood.png" type="Texture" id=2]
-[ext_resource path="res://Materials/rock.png" type="Texture" id=3]
+[ext_resource path="res://Materials/Textures/wood.png" type="Texture" id=2]
+[ext_resource path="res://Materials/Textures/rock.png" type="Texture" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )

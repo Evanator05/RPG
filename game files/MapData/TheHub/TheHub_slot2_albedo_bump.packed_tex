@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://Materials/Textures/Pine Forest Ground/pine_forest_ground1_Height.png",
+		"rgb": "res://Materials/Textures/Pine Forest Ground/pine_forest_ground1_albedo.png"
+	}
+}

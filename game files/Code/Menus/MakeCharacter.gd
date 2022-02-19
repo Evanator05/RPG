@@ -2,10 +2,13 @@ extends Control
 
 onready var playerName = $Name
 
-var classes = [["Axe"], ["Knife"], ["Axe", "Knife", "Nothing"]]
+var classes = [["Axe"], ["Knife"], ["Axe", "Knife", "Church Key"]]
+
+func _ready():
+	updateItems($OptionButton.selected)
 
 func createCharacter(pName:String):
-	Globals.savePlayer(pName, Vector3(311,2,274), Vector3(0,90,0), [1], classes[$OptionButton.selected])
+	Globals.savePlayer(pName, Vector3(305,2,274), Vector3(0,90,0), [1], classes[$OptionButton.selected])
 	Globals.playerName = pName
 	var _scene = get_tree().change_scene("res://Level.tscn")
 
@@ -20,3 +23,18 @@ func _on_CreateCharacter_pressed():
 		createCharacter(text)
 	else:
 		$error.visible = true
+
+
+func _on_OptionButton_item_selected(index):
+	updateItems(index)
+	
+func updateItems(index):
+	var string = "Items:\n"
+	for i in classes[index]:
+		string += i + "\n"
+
+	$items.text = string
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://Scenes/Menus/CharacterSelect.tscn")
