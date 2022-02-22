@@ -10,12 +10,13 @@ func _input(_event):
 		toggleInventory()
 
 func updateInventory(inventory:Array, type:String):
-	for i in itemList.items:
-		itemList.remove_item(0)
+	if itemList.items.size() > 0:
+		for i in itemList.items:
+			itemList.remove_item(0)
 	for item in inventory:
 		if WeaponManager.items["items"][item]["type"] == type:
 			itemList.add_item(item)
-			var icon = load(WeaponManager.items["items"][item]["icon"])
+			var icon = $GenerateIcon.generateIcon(WeaponManager.items["items"][item]["model"])
 			itemList.set_item_icon(itemList.get_item_count()-1,icon)
 
 func toggleInventory():

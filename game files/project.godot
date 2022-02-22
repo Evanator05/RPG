@@ -38,6 +38,7 @@ default_bus_layout=""
 
 Globals="*res://Code/globals.gd"
 WeaponManager="*res://Code/weaponManager.gd"
+Save="*res://Code/save.gd"
 
 [display]
 
@@ -50,7 +51,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/CSGExport/plugin.cfg", "res://addons/cloud/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CSGExport/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 

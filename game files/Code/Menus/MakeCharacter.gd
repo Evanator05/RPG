@@ -8,7 +8,8 @@ func _ready():
 	updateItems($OptionButton.selected)
 
 func createCharacter(pName:String):
-	Globals.savePlayer(pName, Vector3(305,2,274), Vector3(0,90,0), [1], classes[$OptionButton.selected])
+	Save.savePlayer(pName, Vector3(305,2,274), Vector3(0,90,0), [1])
+	Save.saveInventory(pName, classes[$OptionButton.selected])
 	Globals.playerName = pName
 	var _scene = get_tree().change_scene("res://Level.tscn")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://Materials/Textures/water/Water_N_B.png" type="Texture" id=8]
 [ext_resource path="res://Materials/Textures/water/Water_UV.png" type="Texture" id=9]
 [ext_resource path="res://MapData/TheHub/data.hterrain" type="Resource" id=10]
-[ext_resource path="res://Materials/Textures/rock.png" type="Texture" id=11]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Roughness.png" type="Texture" id=11]
 [ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=12]
 [ext_resource path="res://Objects/mapLoader.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/mapUnloader.tscn" type="PackedScene" id=14]
@@ -24,6 +24,11 @@
 [ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-albedo.png" type="Texture" id=22]
 [ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Height.png" type="Texture" id=23]
 [ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Normal-ogl.png" type="Texture" id=24]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-ao.png" type="Texture" id=25]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Height.png" type="Texture" id=26]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Normal-ogl.png" type="Texture" id=27]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Metallic.png" type="Texture" id=28]
+[ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-albedo.png" type="Texture" id=29]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -249,9 +254,24 @@ depth_texture = ExtResource( 23 )
 uv1_scale = Vector3( 0.1, 0.1, 0.1 )
 uv1_triplanar = true
 
-[sub_resource type="SpatialMaterial" id=1]
-flags_world_triplanar = true
-albedo_texture = ExtResource( 11 )
+[sub_resource type="SpatialMaterial" id=10]
+albedo_texture = ExtResource( 29 )
+metallic_texture = ExtResource( 28 )
+roughness_texture = ExtResource( 11 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 27 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 25 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 26 )
 uv1_scale = Vector3( 0.1, 0.1, 0.1 )
 uv1_triplanar = true
 
@@ -335,7 +355,6 @@ mapId = 2
 
 [node name="City" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 765 )
-material_override = SubResource( 1 )
 use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="City"]
@@ -343,30 +362,35 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66, 15, -8.02075 )
 width = 132.0
 height = 34.0
 depth = 198.0
+material = SubResource( 7 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="City/CSGBox"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13, -10, 59 )
 operation = 2
 radius = 16.0
 height = 114.0
+material = SubResource( 7 )
 
 [node name="CSGCylinder2" type="CSGCylinder" parent="City/CSGBox"]
 transform = Transform( 0, 0, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, 0, -28, -10, 83 )
 operation = 2
 radius = 16.0
 height = 80.0
+material = SubResource( 7 )
 
 [node name="CSGPolygon" type="CSGPolygon" parent="City/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.1, -15, -59 )
 operation = 2
 polygon = PoolVector2Array( 1, 0, 1, 15, -24, 15 )
 depth = 10.0
+material = SubResource( 7 )
 
 [node name="CSGPolygon2" type="CSGPolygon" parent="City/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, -2, -7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, -2, -7 )
 operation = 2
 polygon = PoolVector2Array( 1, 0, 1, 19, -29, 19 )
 depth = 10.0
+material = SubResource( 7 )
 
 [node name="CSGBox" type="CSGBox" parent="City/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 8, -64 )
@@ -374,6 +398,7 @@ operation = 2
 width = 42.0
 height = 20.0
 depth = 10.0
+material = SubResource( 7 )
 
 [node name="CSGBox2" type="CSGBox" parent="City/CSGBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 8, -38 )
@@ -381,69 +406,81 @@ operation = 2
 width = 10.0
 height = 20.0
 depth = 66.0
+material = SubResource( 7 )
 
 [node name="CSGBox3" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 69, -54.0208 )
 width = 26.0
 height = 74.0
 depth = 24.0
+material = SubResource( 10 )
 
 [node name="CSGBox4" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 69, -28.0208 )
 width = 26.0
 height = 74.0
 depth = 24.0
+material = SubResource( 10 )
 
 [node name="CSGBox5" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 69, 12.9792 )
 width = 68.0
 height = 74.0
 depth = 56.0
+material = SubResource( 10 )
 
 [node name="CSGBox6" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 61, -40.0208 )
 width = 28.0
 height = 58.0
 depth = 30.0
+material = SubResource( 10 )
 
 [node name="CSGBox7" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 69, -76.0208 )
 width = 28.0
 height = 74.0
 depth = 30.0
+material = SubResource( 10 )
 
 [node name="CSGBox10" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -86, 69, -0.020813 )
 width = 28.0
 height = 74.0
 depth = 30.0
+material = SubResource( 10 )
 
 [node name="CSGBox11" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -97, 69, -63.0208 )
 width = 70.0
 height = 74.0
 depth = 30.0
+material = SubResource( 10 )
 
 [node name="CSGBox12" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -105, 69, -20.0208 )
 width = 54.0
 height = 74.0
 depth = 30.0
+material = SubResource( 10 )
 
 [node name="CSGBox8" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 50, -86.0208 )
 width = 16.0
 height = 36.0
 depth = 14.0
+material = SubResource( 10 )
 
 [node name="CSGBox9" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 12, -68.0208 )
 width = 8.0
+material = SubResource( 7 )
 
 [node name="CSGBox2" type="CSGBox" parent="City"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55, -1, 60 )
 width = 110.0
 depth = 62.0
+material = SubResource( 7 )
 
 [node name="Torches" type="Spatial" parent="."]
 

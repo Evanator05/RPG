@@ -38,7 +38,7 @@ var weapon = "Axe"
 func _ready():
 	add_to_group("Player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	inventory = Globals.player["inventory"]
+	inventory = Globals.playerInventory
 	ui.updateUI(health)
 	updateWeapon(inventory[0])
 	

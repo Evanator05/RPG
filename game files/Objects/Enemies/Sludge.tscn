@@ -1,14 +1,62 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Code/Enemies/Sludge.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Enemies/healthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Audio/fire.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 1.5
 mid_height = 2.0
 
-[sub_resource type="SpatialMaterial" id=14]
-albedo_color = Color( 0.568627, 0.266667, 0, 1 )
+[sub_resource type="Shader" id=15]
+code = "shader_type spatial;
+render_mode depth_draw_alpha_prepass, cull_disabled;
+
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+
+uniform vec4 emission_color : hint_color = vec4(1);
+uniform float emission_amount;
+
+uniform sampler2D dissolve_texture;
+uniform float burn_size : hint_range(0,2);
+uniform float dissolve_amount : hint_range(0,1);
+
+
+void fragment() {
+	vec4 albedo_tex = texture(texture_albedo,UV);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	
+	float sample = texture(dissolve_texture, UV).r;
+	float emission_value = 1.0 - smoothstep(dissolve_amount, dissolve_amount + burn_size, sample);
+	EMISSION = vec3(emission_value * emission_amount * emission_color.rgb);
+	ALPHA = smoothstep(dissolve_amount - burn_size, dissolve_amount, sample);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=17]
+
+[sub_resource type="NoiseTexture" id=18]
+resource_local_to_scene = true
+noise = SubResource( 17 )
+
+[sub_resource type="OpenSimplexNoise" id=19]
+period = 25.2
+persistence = 0.803
+lacunarity = 2.08
+
+[sub_resource type="NoiseTexture" id=20]
+noise = SubResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=16]
+resource_local_to_scene = true
+shader = SubResource( 15 )
+shader_param/albedo = Color( 0.498039, 0.290196, 0, 1 )
+shader_param/emission_color = Color( 1, 0, 0, 1 )
+shader_param/emission_amount = 5.0
+shader_param/burn_size = 0.027
+shader_param/dissolve_amount = 0.0
+shader_param/texture_albedo = SubResource( 20 )
+shader_param/dissolve_texture = SubResource( 18 )
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0, 0, 0, 1 )
@@ -166,6 +214,18 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("body:material/0:shader_param/dissolve_amount")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -357,6 +417,32 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector3( -16.1021, 8.65333e-07, -3.12001e-06 ), Vector3( -76.5957, -132.721, 122.896 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("body:material/0:shader_param/dissolve_amount")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("AudioStreamPlayer3D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 26.5,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0.5 )
+}
 
 [node name="Sludge" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -364,7 +450,7 @@ script = ExtResource( 1 )
 [node name="body" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.8, 0 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="rEye" type="MeshInstance" parent="body"]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0.600006, 1.2, -2 )
@@ -382,25 +468,25 @@ material/0 = null
 transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.541069, 0, -0.388265, 1.87432, 1, 1.6, -1.29999 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="body/rArm"]
 transform = Transform( 0.999999, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 1.14282, -0.379456 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="lArm" type="MeshInstance" parent="body"]
 transform = Transform( 1.5, 0, 0, 0, 1.34499, 0.541069, 0, -0.388265, 1.87432, -1, 1.6, -1.29999 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="MeshInstance8" type="MeshInstance" parent="body/lArm"]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.14282, -0.379456 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 14 )
+material/0 = SubResource( 16 )
 
 [node name="healthBar" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
@@ -412,6 +498,7 @@ transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
 unit_size = 5.0
 
 [node name="hitbox" type="Area" parent="."]

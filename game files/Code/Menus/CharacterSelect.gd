@@ -4,10 +4,10 @@ func _ready():
 	addCharactersToList()
 
 func addCharactersToList():
-	var characters = Globals.getSaves()
+	var characters = Save.getSaves()
 
 	for c in characters:
-		Globals.loadPlayer(c)
+		Save.loadPlayer(c)
 		var text = c + "   I   " + Globals.mapIds[Globals.playerMapChunks[0]]
 		text = seperateByCapital(text)
 		for i in text.length(): #recapitalize each word
@@ -17,7 +17,7 @@ func addCharactersToList():
 		$ItemList.add_item(text)
 
 func _on_ItemList_item_selected(index):
-	Globals.playerName = Globals.getSaves()[index]
+	Globals.playerName = Save.getSaves()[index]
 	var _scene = get_tree().change_scene("res://Level.tscn")
 
 func seperateByCapital(text): #seperate words based on capitals example "HelloWorld" -> "hello world"
