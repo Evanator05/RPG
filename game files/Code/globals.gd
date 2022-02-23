@@ -8,5 +8,3 @@ var player
 var playerSpawnPos
 var playerSpawnRot
 var playerMapChunks = []
-
-var playerInventory = []

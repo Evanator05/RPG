@@ -42,20 +42,7 @@ func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChu
 	file.store_var(makePlayerJson(spawnPos, spawnRot, mapChunks))
 	file.close()
 
-func saveInventory(characterName:String, playerInventory:Array):
-	#create folders
-	var dir = Directory.new()
-	dir.open("user://")
-	dir.make_dir("Characters")
-	dir.open("user://Characters")
-	dir.open("Characters")
-	dir.make_dir(characterName)
-	
-	#save player data
-	var file = File.new()
-	file.open("user://Characters/" + characterName + "/inventory.json", File.WRITE)
-	file.store_var(playerInventory)
-	file.close()
+
 
 
 func makePlayerJson(spawnPos, spawnRot, mapChunks):
@@ -76,17 +63,35 @@ func loadPlayerPos(characterName):
 		var json = file.get_var(true)
 		file.close()
 		
+func saveInventory(characterName:String, playerInventory:Array, currentWeapon:String):
+	#create folders
+	var dir = Directory.new()
+	dir.open("user://Characters")
+	dir.make_dir(characterName)
 	
+	#save player data
+	var file = File.new()
+	file.open("user://Characters/" + characterName + "/inventory.json", File.WRITE)
+	var data = {
+		"inventory": playerInventory,
+		"current": currentWeapon
+	}
+	file.store_var(data)
+	file.close()
+
 func loadPlayerInventory(characterName):
 	#get player data
 	var inventory = []
-	
+	var currentWeapon = ""
+	var items
 	var file = File.new()
 	if file.file_exists("user://Characters/" + characterName + "/inventory.json"):
 		file.open("user://Characters/" + characterName + "/inventory.json", File.READ)
-		inventory = file.get_var(true)
+		items = file.get_var(true)
+	inventory = items["inventory"]
+	currentWeapon = items["current"]
 	
-	return inventory
+	return [inventory,currentWeapon]
 
 func loadPlayer(characterName):
 	#get player data
@@ -100,8 +105,6 @@ func loadPlayer(characterName):
 		Globals.playerSpawnPos = json.Player.spawnPos
 		Globals.playerSpawnRot = json.Player.spawnRot
 		Globals.playerMapChunks = json.Player.mapChunks
-		
-		Globals.playerInventory = loadPlayerInventory(characterName)
 		
 		Globals.player = json.Player
 
