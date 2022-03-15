@@ -1,0 +1,81 @@
+[gd_resource type="SpatialMaterial" load_steps=13 format=2]
+
+[sub_resource type="OpenSimplexNoise" id=8]
+seed = 1
+octaves = 7
+period = 45.9
+persistence = 0.0
+lacunarity = 1.18
+
+[sub_resource type="NoiseTexture" id=9]
+seamless = true
+noise = SubResource( 8 )
+
+[sub_resource type="OpenSimplexNoise" id=10]
+period = 187.8
+persistence = 0.117
+lacunarity = 0.7
+
+[sub_resource type="NoiseTexture" id=11]
+seamless = true
+noise = SubResource( 10 )
+
+[sub_resource type="OpenSimplexNoise" id=15]
+octaves = 4
+period = 103.9
+persistence = 0.0
+lacunarity = 1.55
+
+[sub_resource type="NoiseTexture" id=16]
+seamless = true
+noise = SubResource( 15 )
+
+[sub_resource type="OpenSimplexNoise" id=19]
+
+[sub_resource type="NoiseTexture" id=20]
+noise = SubResource( 19 )
+
+[sub_resource type="OpenSimplexNoise" id=13]
+period = 45.2
+persistence = 0.436
+lacunarity = 0.89
+
+[sub_resource type="NoiseTexture" id=14]
+noise = SubResource( 13 )
+
+[sub_resource type="OpenSimplexNoise" id=17]
+
+[sub_resource type="NoiseTexture" id=18]
+noise = SubResource( 17 )
+
+[resource]
+albedo_color = Color( 1, 0, 0, 1 )
+albedo_texture = SubResource( 9 )
+roughness_texture = SubResource( 14 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = SubResource( 16 )
+rim_enabled = true
+rim = 0.01
+rim_tint = 0.5
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 0.5
+depth_enabled = true
+depth_scale = 8.0
+depth_deep_parallax = true
+depth_min_layers = 8
+depth_max_layers = 32
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = SubResource( 11 )
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.0
+subsurf_scatter_texture = SubResource( 18 )
+transmission_enabled = true
+transmission = Color( 1, 0, 0, 1 )
+refraction_enabled = true
+refraction_scale = 0.05
+refraction_texture = SubResource( 20 )
+refraction_texture_channel = 0
+uv1_triplanar = true

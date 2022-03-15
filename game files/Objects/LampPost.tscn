@@ -11,7 +11,7 @@
 [ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-roughness.png" type="Texture" id=10]
 
 [sub_resource type="CylinderShape" id=12]
-height = 4.0
+height = 6.0
 
 [sub_resource type="SpatialMaterial" id=20]
 albedo_texture = ExtResource( 6 )
@@ -152,7 +152,7 @@ height = 0.04
 script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 shape = SubResource( 12 )
 
 [node name="OmniLight" type="OmniLight" parent="."]

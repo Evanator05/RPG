@@ -16,7 +16,11 @@ func updateInventory(inventory:Array, type:String):
 	for item in inventory:
 		if WeaponManager.items["items"][item]["type"] == type:
 			itemList.add_item(item)
-			var icon = $GenerateIcon.generateIcon(WeaponManager.items["items"][item]["model"])
+			var icon
+			if WeaponManager.items["items"][item]["icon"] == "model":
+				icon = $GenerateIcon.generateIcon(WeaponManager.items["items"][item]["model"])
+			else:
+				icon = load(WeaponManager.items["items"][item]["icon"])
 			itemList.set_item_icon(itemList.get_item_count()-1,icon)
 
 func toggleInventory():

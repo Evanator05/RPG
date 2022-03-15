@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-albedo.png" type="Texture" id=1]
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Height.png" type="Texture" id=2]
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Normal-ogl.png" type="Texture" id=3]
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Roughness.png" type="Texture" id=4]
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-ao.png" type="Texture" id=5]
+[ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Metallic.png" type="Texture" id=6]
+[ext_resource path="res://Materials/GrayBricks.tres" type="Material" id=7]
+[ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=8]
+[ext_resource path="res://Objects/ThePillars/CrystalPillar.tscn" type="PackedScene" id=11]
+
+[sub_resource type="SpatialMaterial" id=22]
+flags_world_triplanar = true
+albedo_texture = ExtResource( 1 )
+metallic_texture = ExtResource( 6 )
+roughness_texture = ExtResource( 4 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 5 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
+uv1_triplanar = true
+
+[node name="ThePillars" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 538, -193, 1012 )
+width = 304.0
+height = 80.0
+material = ExtResource( 7 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 621, -257, 1116 )
+visible = false
+width = 304.0
+depth = 262.0
+material = SubResource( 22 )
+
+[node name="rock" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 685, -263, 1051 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock2" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -263, 1026 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock3" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -245, 1040 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock5" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -220, 1026 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock6" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -242, 1026 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock4" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( -9.53674e-07, 0, 10, 0, 10, 0, -10, 0, -9.53674e-07, 660.8, -263, 1040 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock7" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 10, 0, 0, 0, 9.84808, -1.73648, 0, 1.73648, 9.84808, 685, -218.9, 1044.4 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock8" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -214, 1026 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock9" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -196, 1040 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock10" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 6.9282, 0, 4, 0, 13, 0, -4, 0, 6.9282, 685, -171, 1021.1 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock11" type="CSGMesh" parent="CSGCombiner"]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 681, -193, 1026 )
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="CrystalPillar" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 717, -210, 1027 )
+
+[node name="CrystalPillar2" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 713.7, -210, 1053.8 )
+
+[node name="CrystalPillar3" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, 713.7, -210, 1078.6 )
+
+[node name="CrystalPillar4" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.0871559, 0, 0.996195, 0, 1, 0, -0.996195, 0, 0.0871559, 692.1, -210, 1095.6 )
+
+[node name="CrystalPillar5" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.573577, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573577, 666.9, -207.5, 1095.6 )
+
+[node name="CrystalPillar6" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.996195, 0, -0.0871556, 0, 1, 0, 0.0871556, 0, -0.996195, 666.9, -204.6, 1076 )
+
+[node name="CrystalPillar7" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.34202, 0, -0.939693, 0, 1, 0, 0.939693, 0, 0.34202, 660.9, -204.6, 1050 )
+
+[node name="CrystalPillar8" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 656.9, -201.6, 1025 )
+
+[node name="CrystalPillar9" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 628.9, -198.6, 1025 )
+
+[node name="CrystalPillar10" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.996195, 0, 0.0871555, 0, 1, 0, -0.0871555, 0, 0.996195, 599.1, -198.6, 1025 )
+
+[node name="CrystalPillar11" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.422619, 0, -0.906308, 0, 1, 0, 0.906308, 0, -0.422619, 574.1, -195.6, 1025 )
+
+[node name="CrystalPillar12" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.422619, 0, -0.906308, 0, 1, 0, 0.906308, 0, -0.422619, 553.1, -192.6, 1039 )
+
+[node name="CrystalPillar13" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.996195, 0, -0.0871553, 0, 1, 0, 0.0871553, 0, -0.996195, 535.1, -189.6, 1060 )
+
+[node name="CrystalPillar14" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.173649, 0, -0.984808, 0, 1, 0, 0.984808, 0, -0.173649, 535.1, -187.2, 1084.4 )
+
+[node name="CrystalPillar16" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.996195, 0, 0.087155, 0, 1, 0, -0.087155, 0, 0.996195, 540.1, -183.2, 1133.4 )
+
+[node name="CrystalPillar17" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.810776, -0.482963, -0.330741, -0.498098, 0.866025, -0.0435775, 0.307476, 0.12941, -0.942715, 556.8, -195.7, 1143.2 )
+
+[node name="CrystalPillar18" parent="." instance=ExtResource( 11 )]
+transform = Transform( 0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.5, 554.8, -204.7, 1163.2 )
+
+[node name="CrystalPillar15" parent="." instance=ExtResource( 11 )]
+transform = Transform( -0.173649, 0, -0.984808, 0.336824, 0.939693, -0.0593914, 0.925417, -0.34202, -0.163176, 535.1, -187.9, 1114.3 )

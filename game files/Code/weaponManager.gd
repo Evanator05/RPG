@@ -9,7 +9,7 @@ var items = {
 			"position": Vector3(0, 0.04, 0),
 			"animations": "axeSwing",
 			"damage": 5,
-			"icon": "res://Materials/UI/weaponsIcon.png"
+			"icon": "model"
 			},
 		"Knife": {
 			"type": "weapon",
@@ -18,7 +18,7 @@ var items = {
 			"position": Vector3(0, 0, 0),
 			"animations": "KnifeSwing",
 			"damage": 2,
-			"icon": "res://Materials/UI/keyIcon.png"
+			"icon": "model"
 			},
 		
 		"Church Key": {

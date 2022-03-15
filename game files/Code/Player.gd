@@ -8,7 +8,7 @@ export var airAcceleration = 1
 var horizontalAcceleration = normalAcceleration
 
 export var gravity = 50
-export var jumpForce = 16
+export var jumpForce = 20
 var fullContact = false
 
 export var mouseSensitivity = 0.1
@@ -26,7 +26,7 @@ onready var attackHitbox = $head/attackHitbox
 var maxHealth = 100
 var health = 100
 
-var groundHeight = 0
+onready var groundHeight = global_transform.origin.y
 
 var inventory = []
 var healths = 3
@@ -146,5 +146,5 @@ func heal(healAmount):
 	ui.updateHealthBar(health)
 
 func die():
-	Globals.loadPlayer(Globals.playerName)
+	Save.loadPlayer(Globals.playerName)
 	var scene = get_tree().reload_current_scene()
