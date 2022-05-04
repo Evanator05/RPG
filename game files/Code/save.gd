@@ -1,14 +1,10 @@
 extends Node
 
-
-
-
 func _ready():
 	#create folders
 	var dir = Directory.new()
 	dir.open("user://")
 	dir.make_dir("Characters")
-
 
 func getSaves():
 	var c = []
@@ -41,9 +37,6 @@ func savePlayer(characterName:String, spawnPos:Vector3, spawnRot:Vector3, mapChu
 	file.open("user://Characters/" + characterName + "/playerPosition.json", File.WRITE)
 	file.store_var(makePlayerJson(spawnPos, spawnRot, mapChunks))
 	file.close()
-
-
-
 
 func makePlayerJson(spawnPos, spawnRot, mapChunks):
 	var data = {
@@ -108,3 +101,24 @@ func loadPlayer(characterName):
 		
 		Globals.player = json.Player
 
+func saveStates():
+	var objects = get_tree().get_nodes_in_group("save")
+	var dir = Directory.new()
+	dir.open("user://Characters/" + Globals.playerName)
+	dir.make_dir("Save")
+	for object in objects:
+		var file = File.new()
+		file.open("user://Characters/" + Globals.playerName + "/Save/" + str(object.id) + ".sav", File.WRITE)
+		file.store_line(str(object.state))
+		file.close()
+
+func loadState(id:int):
+	var dir = Directory.new();
+	var exists = dir.file_exists("user://Characters/" + Globals.playerName + "/Save/" + str(id) + ".sav")
+	if exists:
+		var file = File.new()
+		file.open("user://Characters/" + Globals.playerName + "/Save/" + str(id) + ".sav", File.READ)
+		var state = int(file.get_line())
+		file.close()
+		return state
+	return 0

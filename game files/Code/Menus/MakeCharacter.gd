@@ -2,13 +2,15 @@ extends Control
 
 onready var playerName = $Name
 
-var classes = [["Axe"], ["Knife"], ["Axe", "Knife", "Church Key"]]
+var classes = [["Barbarian",["Axe"]], ["Assassan",["Knife"]], ["Everything",["Axe", "Knife", "Abyss", "Church Key"]]]
 
 func _ready():
+	for className in classes:
+		$OptionButton.add_item(className[0])
 	updateItems($OptionButton.selected)
 
 func createCharacter(pName:String):
-	var items = classes[$OptionButton.selected]
+	var items = classes[$OptionButton.selected][1]
 	Save.savePlayer(pName, Vector3(305,2,274), Vector3(0,90,0), [1])
 	Save.saveInventory(pName, items, items[0])
 	Globals.playerName = pName
@@ -32,7 +34,7 @@ func _on_OptionButton_item_selected(index):
 	
 func updateItems(index):
 	var string = "Items:\n"
-	for i in classes[index]:
+	for i in classes[index][1]:
 		string += i + "\n"
 
 	$items.text = string

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Materials/Textures/Cratered Rock/cratered-rock-ao.png" type="Texture" id=2]
 [ext_resource path="res://Models/Weapons/LampCage.obj" type="ArrayMesh" id=3]
@@ -32,7 +32,7 @@ depth_flip_tangent = false
 depth_flip_binormal = false
 depth_texture = ExtResource( 7 )
 
-[sub_resource type="Shader" id=22]
+[sub_resource type="Shader" id=32]
 code = "shader_type spatial;
 render_mode specular_schlick_ggx;
 
@@ -91,7 +91,7 @@ period = 218.7
 persistence = 0.255
 lacunarity = 1.34
 
-[sub_resource type="NoiseTexture" id=25]
+[sub_resource type="NoiseTexture" id=33]
 seamless = true
 noise = SubResource( 24 )
 
@@ -100,12 +100,12 @@ period = 15.3
 persistence = 0.0
 lacunarity = 1.26
 
-[sub_resource type="NoiseTexture" id=27]
+[sub_resource type="NoiseTexture" id=34]
 seamless = true
 noise = SubResource( 26 )
 
-[sub_resource type="ShaderMaterial" id=28]
-shader = SubResource( 22 )
+[sub_resource type="ShaderMaterial" id=35]
+shader = SubResource( 32 )
 shader_param/Glow_Power = 0.824
 shader_param/Lightness_Difference = 2.88
 shader_param/Sun_Color = Color( 1, 0, 0, 1 )
@@ -113,15 +113,87 @@ shader_param/waveSpeed = 0.5
 shader_param/fresnel = 0.995
 shader_param/scale = 2.0
 shader_param/blendSharpness = 2.0
-shader_param/voronoi_noise = SubResource( 27 )
-shader_param/emission_noise = SubResource( 25 )
+shader_param/voronoi_noise = SubResource( 34 )
+shader_param/emission_noise = SubResource( 33 )
 
 [sub_resource type="CylinderMesh" id=13]
-material = SubResource( 28 )
+material = SubResource( 35 )
 bottom_radius = 0.1
 height = 1000.0
 
-[sub_resource type="ShaderMaterial" id=23]
+[sub_resource type="Shader" id=22]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float Glow_Power : hint_range(0,10) = 3;
+uniform float Lightness_Difference : hint_range(0,10) = 3;
+uniform vec4 Sun_Color : hint_color;
+
+uniform sampler2D voronoi_noise;
+uniform sampler2D emission_noise;
+varying vec3 vertex_pos;
+uniform float waveSpeed : hint_range(0,1) = 0.1;
+uniform float fresnel : hint_range(0,2) = 1.0;
+
+uniform float scale : hint_range(0,2) = 0.01;
+uniform float blendSharpness : hint_range(0,2) = 0.0;
+
+// TRIPLANAR FUNCTION
+vec4 triplanar_texture(vec3 position, vec3 normal, vec2 offset, sampler2D noise) {
+	vec4 colX = texture(noise, position.xy * scale + offset);
+	vec4 colY = texture(noise, position.xz * scale + offset);
+	vec4 colZ = texture(noise, position.zy * scale + offset);
+	
+	vec3 blendWeight = abs(normal);
+	blendWeight = vec3(pow(blendWeight.x, blendSharpness), pow(blendWeight.y, blendSharpness), pow(blendWeight.z, blendSharpness));
+	blendWeight /= (blendWeight.x + blendWeight.y + blendWeight.z);
+	
+	return colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
+}
+
+void vertex() {
+	vertex_pos = VERTEX;
+}
+
+void fragment() {
+	ALBEDO = vec3(0,0,0);
+	// Fresnel
+	float fresnel_out = pow(fresnel - clamp(dot(NORMAL, VIEW), 0.0, fresnel), fresnel);
+
+	vec2 waveOffsetA = vec2(TIME * waveSpeed, TIME * waveSpeed * 0.8);
+	vec2 waveOffsetB = vec2(TIME * waveSpeed * - 0.8, TIME * waveSpeed * -0.3);
+	vec2 result_offset = waveOffsetA + waveOffsetB;
+
+	vec3 cloud_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, voronoi_noise).rgb;
+	vec3 cloud_tex_with_light = cloud_tex * vec3(Lightness_Difference);
+	vec3 cloud_tex_with_light_with_color = cloud_tex_with_light * Sun_Color.rgb;
+	vec3 cloud_tex_with_light_with_color_with_glow = vec3(Glow_Power) * cloud_tex_with_light_with_color;
+
+	vec3 noise_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, emission_noise).rgb;
+	vec3 result = cloud_tex_with_light_with_color_with_glow * noise_tex;
+
+	EMISSION = vec3(fresnel_out) * result;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=42]
+period = 218.7
+persistence = 0.255
+lacunarity = 1.34
+
+[sub_resource type="NoiseTexture" id=25]
+seamless = true
+noise = SubResource( 42 )
+
+[sub_resource type="OpenSimplexNoise" id=43]
+period = 15.3
+persistence = 0.0
+lacunarity = 1.26
+
+[sub_resource type="NoiseTexture" id=27]
+seamless = true
+noise = SubResource( 43 )
+
+[sub_resource type="ShaderMaterial" id=44]
 shader = SubResource( 22 )
 shader_param/Glow_Power = 0.824
 shader_param/Lightness_Difference = 2.88
@@ -134,7 +206,7 @@ shader_param/voronoi_noise = SubResource( 27 )
 shader_param/emission_noise = SubResource( 25 )
 
 [sub_resource type="SphereMesh" id=21]
-material = SubResource( 23 )
+material = SubResource( 44 )
 radius = 0.5
 height = 1.0
 
@@ -143,8 +215,20 @@ emission_shape = 2
 emission_box_extents = Vector3( 0.4, 0, 0.4 )
 gravity = Vector3( 0, 1, 0 )
 
-[sub_resource type="SphereMesh" id=29]
-material = SubResource( 28 )
+[sub_resource type="ShaderMaterial" id=41]
+shader = SubResource( 22 )
+shader_param/Glow_Power = 0.824
+shader_param/Lightness_Difference = 2.88
+shader_param/Sun_Color = Color( 1, 0, 0, 1 )
+shader_param/waveSpeed = 0.5
+shader_param/fresnel = 0.995
+shader_param/scale = 2.0
+shader_param/blendSharpness = 2.0
+shader_param/voronoi_noise = SubResource( 27 )
+shader_param/emission_noise = SubResource( 25 )
+
+[sub_resource type="SphereMesh" id=37]
+material = SubResource( 41 )
 radius = 0.02
 height = 0.04
 
@@ -181,7 +265,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 lifetime = 1.3
 visibility_aabb = AABB( -0.8, -1, -0.8, 1.6, 2, 1.6 )
 process_material = SubResource( 17 )
-draw_pass_1 = SubResource( 29 )
+draw_pass_1 = SubResource( 37 )
 
 [node name="activate" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )

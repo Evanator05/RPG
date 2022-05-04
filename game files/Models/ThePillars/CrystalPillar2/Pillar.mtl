@@ -1,0 +1,8 @@
+newmtl [SpatialMaterial:28250]
+Kd 1 0 0
+Ke 0 0 0
+d 1
+newmtl [SpatialMaterial:28235]
+Kd 1 1 1
+Ke 0 0 0
+d 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Normal-ogl.png" type="Texture" id=27]
 [ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-Metallic.png" type="Texture" id=28]
 [ext_resource path="res://Materials/Textures/Gray Bricks/gray-bricks1-albedo.png" type="Texture" id=29]
+[ext_resource path="res://Objects/MusicPlayer.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Objects/CityLamp.tscn" type="PackedScene" id=31]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 1 )
@@ -489,3 +491,22 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 88, 15,
 
 [node name="Torch2" parent="Torches" instance=ExtResource( 15 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 93, 15, 752 )
+
+[node name="MusicPlayer" parent="." instance=ExtResource( 30 )]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 352, 0, 758 )
+songPath = "res://Audio/Music/orbCult.wav"
+
+[node name="LampPost" parent="." instance=ExtResource( 31 )]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 366.108, 0, 642.779 )
+
+[node name="LampPost2" parent="." instance=ExtResource( 31 )]
+transform = Transform( 1, 0, 1.49012e-07, 0, 1, 0, -1.49012e-07, 0, 1, 349.755, 0, 642.861 )
+
+[node name="LampPost3" parent="." instance=ExtResource( 31 )]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 347.733, 0, 661.336 )
+
+[node name="LampPost4" parent="." instance=ExtResource( 31 )]
+transform = Transform( 0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 349.415, 0, 683.44 )
+
+[node name="LampPost5" parent="." instance=ExtResource( 31 )]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 352.758, 0, 718.241 )

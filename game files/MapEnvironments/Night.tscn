@@ -5,7 +5,6 @@
 [sub_resource type="Environment" id=1]
 background_mode = 1
 background_sky = SubResource( 2 )
-background_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.1
 fog_enabled = true

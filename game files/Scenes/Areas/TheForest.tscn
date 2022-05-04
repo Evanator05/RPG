@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
 [ext_resource path="res://MapData/TheForest/TheForest_slot1_normal_roughness.packed_tex" type="Texture" id=3]
 [ext_resource path="res://MapData/TheForest/TheForest_slot0_normal_roughness.packed_tex" type="Texture" id=4]
+[ext_resource path="res://Objects/ItemPickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://MapData/TheForest/data.hterrain" type="Resource" id=6]
 [ext_resource path="res://Models/Rock.tres" type="ArrayMesh" id=7]
 [ext_resource path="res://MapData/TheForest/TheForest_slot0_albedo_bump.packed_tex" type="Texture" id=8]
@@ -373,3 +374,8 @@ transform = Transform( 2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, 274, 2, 2
 
 [node name="Torch2" parent="." instance=ExtResource( 13 )]
 transform = Transform( 2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, 274, 2, 281 )
+
+[node name="ItemPickup" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 293, 0, 261 )
+item = "Abyss"
+id = 165897

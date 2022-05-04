@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Materials/GrayBricks.tres" type="Material" id=1]
 [ext_resource path="res://Objects/mapLoader.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Objects/LiftLever.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Materials/Textures/wood.png" type="Texture" id=7]
 [ext_resource path="res://Objects/Enemies/Sludge.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/DeathTrigger.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=7]
 albedo_texture = ExtResource( 7 )
@@ -514,6 +515,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 874, -1, 907 )
 topPos = -1
 botPos = -200
 startTop = true
+id = 175753
 maxSpeed = 25
 
 [node name="MeshInstance2" type="MeshInstance" parent="LiftsLevers/MovingPlatform"]
@@ -534,6 +536,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 834, -1, 811 )
 topPos = -1
 botPos = -200
 startTop = true
+id = 86286452
 maxSpeed = 25
 
 [node name="MeshInstance3" type="MeshInstance" parent="LiftsLevers/MovingPlatform2"]
@@ -611,3 +614,9 @@ transform = Transform( 1, 0, 2.5332e-07, 0, 1, 0, -2.5332e-07, 0, 1, 772.455, -2
 
 [node name="Sludge18" parent="Enemies" instance=ExtResource( 8 )]
 transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 765.455, -228, 972.929 )
+
+[node name="DeathTrigger" parent="." instance=ExtResource( 9 )]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 873, -220, 907 )
+
+[node name="DeathTrigger2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 834, -220, 810 )

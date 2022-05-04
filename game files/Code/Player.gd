@@ -37,6 +37,7 @@ var weapon = "Axe"
 
 func _ready():
 	add_to_group("Player")
+	add_to_group("health")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ui.updateUI(health)
 	updateWeapon(weapon)
@@ -130,12 +131,12 @@ func stopAttacking():
 
 func dealDamage(multiplier:int):
 	for body in attackHitbox.get_overlapping_bodies():
-		if body.is_in_group("health"):
-			body.takeDamage(self, damage*multiplier)
+		if body != self:
+			if body.is_in_group("health"):
+				body.takeDamage(self, damage*multiplier)
 
 func takeDamage(damageAmount):
 	health -= damageAmount
-
 	ui.updateHealthBar(health)
 	if health <= 0:
 		die()
@@ -144,6 +145,10 @@ func heal(healAmount):
 	health += healAmount
 	health = clamp(health, 0, maxHealth)
 	ui.updateHealthBar(health)
+
+func getItem(itemName):
+	inventory.append(itemName)
+	Save.saveInventory(Globals.playerName, inventory, weapon)
 
 func die():
 	Save.loadPlayer(Globals.playerName)

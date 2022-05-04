@@ -37,9 +37,6 @@ font_data = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.333
@@ -110,8 +107,6 @@ margin_right = 0.640015
 margin_bottom = 0.399994
 custom_fonts/font = SubResource( 19 )
 text = "Axe"
-items = [ "Axe", null, false, 0, null, "Knife", null, false, 1, null, "Both", null, false, 2, null ]
-selected = 0
 
 [node name="items" type="Label" parent="."]
 anchor_left = 0.367

@@ -12,8 +12,5 @@ texture_normal = ExtResource( 1 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="pressed" from="." to="." method="_on_inventoryTab_pressed"]

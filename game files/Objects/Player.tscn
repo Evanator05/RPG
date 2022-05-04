@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Code/head.gd" type="Script" id=1]
 [ext_resource path="res://Code/Player.gd" type="Script" id=2]
 [ext_resource path="res://Code/UI.gd" type="Script" id=3]
 [ext_resource path="res://Audio/SwordSwings/swordWhoosh.wav" type="AudioStream" id=4]
-[ext_resource path="res://Models/Weapons/Scenes/Knife.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/UI/Inventory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/UI/Crosshair.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/UI/HealthBar.tscn" type="PackedScene" id=8]
@@ -240,7 +239,92 @@ mid_height = 0.5
 [sub_resource type="SpatialMaterial" id=17]
 albedo_color = Color( 0, 0, 1, 1 )
 
+[sub_resource type="Shader" id=22]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform float Glow_Power : hint_range(0,10) = 3;
+uniform float Lightness_Difference : hint_range(0,10) = 3;
+uniform vec4 Sun_Color : hint_color;
+
+uniform sampler2D voronoi_noise;
+uniform sampler2D emission_noise;
+varying vec3 vertex_pos;
+uniform float waveSpeed : hint_range(0,1) = 0.1;
+uniform float fresnel : hint_range(0,2) = 1.0;
+
+uniform float scale : hint_range(0,2) = 0.01;
+uniform float blendSharpness : hint_range(0,2) = 0.0;
+
+// TRIPLANAR FUNCTION
+vec4 triplanar_texture(vec3 position, vec3 normal, vec2 offset, sampler2D noise) {
+	vec4 colX = texture(noise, position.xy * scale + offset);
+	vec4 colY = texture(noise, position.xz * scale + offset);
+	vec4 colZ = texture(noise, position.zy * scale + offset);
+	
+	vec3 blendWeight = abs(normal);
+	blendWeight = vec3(pow(blendWeight.x, blendSharpness), pow(blendWeight.y, blendSharpness), pow(blendWeight.z, blendSharpness));
+	blendWeight /= (blendWeight.x + blendWeight.y + blendWeight.z);
+	
+	return colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
+}
+
+void vertex() {
+	vertex_pos = VERTEX;
+}
+
+void fragment() {
+	ALBEDO = vec3(0,0,0);
+	// Fresnel
+	float fresnel_out = pow(fresnel - clamp(dot(NORMAL, VIEW), 0.0, fresnel), fresnel);
+
+	vec2 waveOffsetA = vec2(TIME * waveSpeed, TIME * waveSpeed * 0.8);
+	vec2 waveOffsetB = vec2(TIME * waveSpeed * - 0.8, TIME * waveSpeed * -0.3);
+	vec2 result_offset = waveOffsetA + waveOffsetB;
+
+	vec3 cloud_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, voronoi_noise).rgb;
+	vec3 cloud_tex_with_light = cloud_tex * vec3(Lightness_Difference);
+	vec3 cloud_tex_with_light_with_color = cloud_tex_with_light * Sun_Color.rgb;
+	vec3 cloud_tex_with_light_with_color_with_glow = vec3(Glow_Power) * cloud_tex_with_light_with_color;
+
+	vec3 noise_tex = triplanar_texture(vertex_pos, NORMAL, result_offset, emission_noise).rgb;
+	vec3 result = cloud_tex_with_light_with_color_with_glow * noise_tex;
+
+	EMISSION = vec3(fresnel_out) * result;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=29]
+period = 218.7
+persistence = 0.255
+lacunarity = 1.34
+
+[sub_resource type="NoiseTexture" id=25]
+seamless = true
+noise = SubResource( 29 )
+
+[sub_resource type="OpenSimplexNoise" id=30]
+period = 15.3
+persistence = 0.0
+lacunarity = 1.26
+
+[sub_resource type="NoiseTexture" id=27]
+seamless = true
+noise = SubResource( 30 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/Glow_Power = 0.824
+shader_param/Lightness_Difference = 2.88
+shader_param/Sun_Color = Color( 1, 0, 0, 1 )
+shader_param/waveSpeed = 0.299
+shader_param/fresnel = 0.591
+shader_param/scale = 0.796
+shader_param/blendSharpness = 2.0
+shader_param/voronoi_noise = SubResource( 27 )
+shader_param/emission_noise = SubResource( 25 )
+
 [sub_resource type="CapsuleMesh" id=3]
+material = SubResource( 23 )
 mid_height = 2.0
 
 [node name="Player" type="KinematicBody"]
@@ -260,11 +344,11 @@ script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="head"]
 fov = 90.0
-far = 1000.0
+far = 1500.0
 
 [node name="interactCast" type="RayCast" parent="head"]
 enabled = true
-cast_to = Vector3( 0, 0, -5 )
+cast_to = Vector3( 0, 0, -6 )
 
 [node name="attackHitbox" type="Area" parent="head"]
 
@@ -282,17 +366,16 @@ transform = Transform( 0.997669, 0, -0.0682417, 0, 1, 0, 0.0682417, 0, 0.997669,
 
 [node name="Weapon" type="Spatial" parent="head/hand"]
 
-[node name="Knife" parent="head/hand/Weapon" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, 0, 0, 0 )
-
 [node name="hand" type="MeshInstance" parent="head/hand"]
 transform = Transform( 0.997671, 0, 0.0682418, 0, 1, 0, -0.0682418, 0, 0.997671, 0.00712055, -0.022, 0.00151715 )
+cast_shadow = 0
 mesh = SubResource( 12 )
 skeleton = NodePath("../../..")
 material/0 = SubResource( 16 )
 
 [node name="arm" type="MeshInstance" parent="head/hand/hand"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.299999 )
+cast_shadow = 0
 mesh = SubResource( 13 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 17 )
@@ -303,6 +386,7 @@ pitch_scale = 2.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+cast_shadow = 0
 mesh = SubResource( 3 )
 material/0 = null
 
@@ -321,9 +405,6 @@ omni_attenuation = 1.6818
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Crosshair" parent="UI" instance=ExtResource( 7 )]
 

@@ -1,4 +1,4 @@
-extends KinematicBody
+extends StaticBody
 
 var movement = Vector3()
 
@@ -9,6 +9,9 @@ export var topPos = 0
 export var botPos = 0
 export var startTop = false
 
+export var state = 0
+export var id = 0
+
 export var maxSpeed = 10
 var speed = 0
 
@@ -17,31 +20,39 @@ var direction = 1
 
 onready var buttonModel = $buttonModel
 
+
 func _ready():
+	add_to_group("save")
+	state = Save.loadState(id)
+	if not(state == 0):
+		startTop = clamp(state, 0, 1)
 	global_transform.origin.y = (topPos*int(startTop)) + (botPos*int(not startTop))
 	direction = 1 - (2 * int(not startTop))
+	
 
 func _process(delta):
-	var currentPos = abs((global_transform.origin.y/(topPos-botPos))*100)
-	speed = (pow(currentPos,2)/-50)+2*currentPos
-	speed = clamp(speed, .5, maxSpeed)
-	
-	if global_transform.origin.y > topPos or global_transform.origin.y < botPos:
-		stopMoving()
-	
-	movement.y = int(isMoving) * direction * speed * delta
+	var currentPos = .5
+
+	speed = -4*pow(currentPos-.5,2)+1
+	speed = clamp(speed, .2, 1)
+	print(speed)
+	movement.y = int(isMoving) * direction * speed * maxSpeed * delta
 
 	buttonModel.translation.y = lerp(buttonModel.translation.y, 1-(int(isMoving)*0.45), 1 - pow(0.02, delta))
 	#move objects on elevator
-	if movement.y < 0:
-		for body in $standingArea.get_overlapping_bodies():
-			body.global_transform.origin += movement
+	for body in $standingArea.get_overlapping_bodies():
+		body.global_transform.origin += movement
 	
 	global_transform.origin += movement
+	
+	if global_transform.origin.y > topPos or global_transform.origin.y < botPos:
+		stopMoving()
 
 func startMoving():
 	isMoving = true
 	direction = direction*-1
+	state = direction
+	Save.saveStates()
 	$gearSounds.stream = liftGears
 	$gearSounds.play()
 
