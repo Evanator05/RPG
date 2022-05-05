@@ -35,7 +35,7 @@ func _process(delta):
 
 	speed = -4*pow(currentPos-.5,2)+1
 	speed = clamp(speed, .2, 1)
-	print(speed)
+
 	movement.y = int(isMoving) * direction * speed * maxSpeed * delta
 
 	buttonModel.translation.y = lerp(buttonModel.translation.y, 1-(int(isMoving)*0.45), 1 - pow(0.02, delta))

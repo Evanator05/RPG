@@ -58,7 +58,6 @@ tracks/0/keys = {
 }
 
 [node name="LiftLever" type="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 872, 0, 900 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

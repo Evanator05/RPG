@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-albedo.png" type="Texture" id=1]
 [ext_resource path="res://Materials/Textures/Rocky Ground/damp-rocky-ground1-Height.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Objects/LiftLever.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/DeathTrigger.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/ThePillars/RockPlatform.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Code/ThePillars/Cage.gd" type="Script" id=17]
+[ext_resource path="res://Materials/metalBars.png" type="Texture" id=18]
 
 [sub_resource type="SpatialMaterial" id=22]
 flags_world_triplanar = true
@@ -239,6 +241,43 @@ shader_param/emission_noise = SubResource( 50 )
 material = SubResource( 53 )
 radius = 0.5
 height = 1.0
+
+[sub_resource type="SpatialMaterial" id=57]
+flags_transparent = true
+albedo_texture = ExtResource( 18 )
+uv1_scale = Vector3( 0.2, 0.2, 0.2 )
+uv1_triplanar = true
+
+[sub_resource type="Animation" id=55]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=56]
+resource_name = "opening"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 584, -195, 1238 ), Vector3( 584, -214, 1238 ) ]
+}
 
 [node name="ThePillars" type="Spatial"]
 
@@ -687,6 +726,9 @@ transform = Transform( -3.53554, 0, 3.53553, 0, 5, 0, -3.53553, 0, -3.53554, 230
 [node name="CrystalPillar33" parent="pillars" instance=ExtResource( 11 )]
 transform = Transform( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, 931.8, -667.7, 1083.2 )
 
+[node name="CrystalPillar57" parent="pillars" instance=ExtResource( 11 )]
+transform = Transform( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, 758.8, -614.7, 1354.2 )
+
 [node name="CrystalPillar19" parent="pillars" instance=ExtResource( 10 )]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 629, -347, 1523 )
 
@@ -756,6 +798,10 @@ material/0 = null
 transform = Transform( 3.09086e-08, 0.707107, 0.707107, 1, -4.37114e-08, 0, 3.09086e-08, 0.707107, -0.707107, 583.9, -193, 1243.3 )
 lift = NodePath("../MovingPlatform")
 
+[node name="LiftLever8" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( -0.5, 0, 0.866026, 0, 1, 0, -0.866025, 0, -0.5, 587.9, -194.7, 1238.3 )
+lift = NodePath("../../Cage")
+
 [node name="LiftLever4" parent="Lifts" instance=ExtResource( 14 )]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 594.9, -254, 1543.3 )
 lift = NodePath("../MovingPlatform2")
@@ -788,6 +834,35 @@ id = 3721362
 
 [node name="DeathTrigger" parent="Lifts/MovingPlatform2" instance=ExtResource( 15 )]
 transform = Transform( 4.5, 0, -6.70552e-08, 0, 0.5, 0, 6.70552e-08, 0, 4.5, 0, -1.5, 0 )
+
+[node name="LiftLever6" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 825, -387, 1359 )
+lift = NodePath("../MovingPlatform3")
+
+[node name="LiftLever9" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 648, -558.448, 1269 )
+lift = NodePath("../MovingPlatform4")
+
+[node name="LiftLever10" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( -1.07345e-08, 0.573576, 0.819152, 1, -4.37114e-08, 4.37114e-08, 6.08781e-08, 0.819152, -0.573576, 632, -404.448, 1260.5 )
+lift = NodePath("../MovingPlatform4")
+
+[node name="LiftLever7" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 819, -558.7, 1345 )
+lift = NodePath("../MovingPlatform3")
+
+[node name="MovingPlatform3" parent="Lifts" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 829, -390, 1351 )
+topPos = -390
+botPos = -560
+startTop = true
+id = 7277455465433515
+
+[node name="MovingPlatform4" parent="Lifts" instance=ExtResource( 13 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 640, -558, 1271.2 )
+topPos = -411
+botPos = -558
+id = 1245375467465546496
 
 [node name="Platforms" type="Spatial" parent="."]
 
@@ -829,3 +904,55 @@ transform = Transform( 4.82963, 0, 1.2941, 0, 5, 0, -1.2941, 0, 4.82963, 799.389
 
 [node name="RockPlatform13" parent="Platforms" instance=ExtResource( 16 )]
 transform = Transform( 4.82963, 0, 1.2941, 0, 5, 0, -1.2941, 0, 4.82963, 804.389, -373, 1488.97 )
+
+[node name="RockPlatform14" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( 4.82963, 0, 1.2941, 0, 5, 0, -1.2941, 0, 4.82963, 821.389, -383, 1457.97 )
+
+[node name="RockPlatform15" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( 4.82963, 0, 1.2941, 0, 5, 0, -1.2941, 0, 4.82963, 824.389, -386, 1440.97 )
+
+[node name="RockPlatform16" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( -4.29153e-06, 0, 5, 0, 5, 0, -5, 0, -4.29153e-06, 823.389, -386, 1423.97 )
+
+[node name="RockPlatform17" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( -4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 823.389, -386, 1404.97 )
+
+[node name="RockPlatform18" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( -4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 823.389, -386, 1383.97 )
+
+[node name="RockPlatform19" parent="Platforms" instance=ExtResource( 16 )]
+transform = Transform( -4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 827.389, -388, 1364.97 )
+
+[node name="CrystalPillar" parent="Platforms" instance=ExtResource( 11 )]
+transform = Transform( -0.139582, -0.166456, -0.93257, -0.23028, 0.463441, -0.296415, 0.963062, 0.0866892, -0.206039, 818.6, -387, 1476 )
+
+[node name="Cage" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 584, -196.9, 1238 )
+material_override = SubResource( 57 )
+use_collision = true
+script = ExtResource( 17 )
+id = 65144135475465
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Cage"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 8, 0.799927 )
+radius = 13.0
+height = 18.0
+sides = 32
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="Cage"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 8, 0.799927 )
+operation = 2
+radius = 11.0
+height = 20.0
+sides = 32
+
+[node name="CSGCylinder3" type="CSGCylinder" parent="Cage"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 9 )
+operation = 2
+radius = 12.0
+height = 20.0
+sides = 32
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cage"]
+anims/RESET = SubResource( 55 )
+anims/opening = SubResource( 56 )
