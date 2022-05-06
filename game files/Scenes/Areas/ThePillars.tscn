@@ -754,6 +754,15 @@ use_collision = true
 mesh = ExtResource( 8 )
 material = SubResource( 22 )
 
+[node name="CrystalPillar58" parent="pillars" instance=ExtResource( 11 )]
+transform = Transform( 0.25882, 0, -0.965925, 0, 1, 0, 0.965925, 0, 0.25882, 518.725, -247.7, 1516 )
+
+[node name="rock17" type="CSGMesh" parent="pillars/CrystalPillar58"]
+transform = Transform( 9.65924, -6.45239e-08, 2.58818, 6.70552e-08, 10, 0, -2.58818, 3.72529e-08, 9.65924, -17.5861, -72.3002, 1.14709 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
 [node name="CrystalPillar53" parent="pillars" instance=ExtResource( 11 )]
 transform = Transform( -0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 545.524, -251.7, 1516.13 )
 
@@ -829,7 +838,7 @@ mesh = ExtResource( 8 )
 material = SubResource( 22 )
 
 [node name="rock6" type="CSGMesh" parent="pillars/CrystalPillar36"]
-transform = Transform( 14.9399, -0.702816, 5.68388, 3.68922, -10.9647, -11.0528, 4.38065, 11.631, -10.0762, 24.1416, 55.8921, -16.0495 )
+transform = Transform( 14.9399, -0.702816, 5.68388, 3.68922, -10.9647, -11.0528, 4.38065, 11.631, -10.0762, 22.0545, 55.7999, -16.2626 )
 use_collision = true
 mesh = ExtResource( 8 )
 material = SubResource( 22 )
@@ -983,13 +992,31 @@ botPos = -560
 startTop = true
 id = 7277455465433515
 
+[node name="LiftLever11" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( 2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 656, -409, 1008 )
+lift = NodePath("../MovingPlatform5")
+
+[node name="LiftLever12" parent="Lifts" instance=ExtResource( 14 )]
+transform = Transform( 2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 656, -909.619, 994 )
+lift = NodePath("../MovingPlatform5")
+
 [node name="MovingPlatform4" parent="Lifts" instance=ExtResource( 13 )]
-transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 640, -558, 1271.2 )
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 640, -556, 1271.2 )
 topPos = -411
-botPos = -558
+botPos = -556
 id = 1245375467465546496
 
 [node name="DeathTrigger2" parent="Lifts/MovingPlatform4" instance=ExtResource( 15 )]
+transform = Transform( 4.5, 0, 0, 0, 0.5, 0, 0, 0, 4.5, 0, -1.5, 0 )
+
+[node name="MovingPlatform5" parent="Lifts" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 651, -411, 1000 )
+topPos = -411
+botPos = -910
+startTop = true
+id = 145325345
+
+[node name="DeathTrigger2" parent="Lifts/MovingPlatform5" instance=ExtResource( 15 )]
 transform = Transform( 4.5, 0, 0, 0, 0.5, 0, 0, 0, 4.5, 0, -1.5, 0 )
 
 [node name="Platforms" type="Spatial" parent="."]
@@ -1084,3 +1111,87 @@ sides = 32
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cage"]
 anims/RESET = SubResource( 55 )
 anims/opening = SubResource( 56 )
+
+[node name="Depths" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 652, -901, 927 )
+use_collision = true
+
+[node name="rock7" type="CSGMesh" parent="Depths"]
+transform = Transform( -12.9409, 1.96041e-05, 48.2963, 1.3113e-05, 50, -1.6782e-05, -48.2963, 8.32267e-06, -12.9409, 21.9964, -1.00073, -122.003 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock8" type="CSGMesh" parent="Depths"]
+transform = Transform( -43.3013, 1.97472e-05, 25, 1.3113e-05, 50, -1.6782e-05, -25, -7.97716e-06, -43.3013, -121.004, -1.00073, -58.0028 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock12" type="CSGMesh" parent="Depths"]
+transform = Transform( -43.3013, 1.97472e-05, 25, 1.3113e-05, 50, -1.6782e-05, -25, -7.97716e-06, -43.3013, -62.0036, 110.999, -161.003 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock13" type="CSGMesh" parent="Depths"]
+transform = Transform( -43.3013, 1.97472e-05, 25, 1.3113e-05, 50, -1.6782e-05, -25, -7.97716e-06, -43.3013, 33.9964, 110.999, -161.003 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock14" type="CSGMesh" parent="Depths"]
+transform = Transform( -43.3013, 1.97472e-05, 25, 1.3113e-05, 50, -1.6782e-05, -25, -7.97716e-06, -43.3013, -21.0036, 199.999, -187.003 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock9" type="CSGMesh" parent="Depths"]
+transform = Transform( -48.2963, 8.32267e-06, -12.9409, 1.3113e-05, 50, -1.6782e-05, 12.9409, -1.96041e-05, -48.2963, -158.004, -1.00073, 66.9972 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock10" type="CSGMesh" parent="Depths"]
+transform = Transform( -48.2963, 1.70097e-05, 12.941, 1.3113e-05, 50, -1.6782e-05, -12.941, -1.28163e-05, -48.2963, 152.996, -1.00073, 66.9972 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="rock11" type="CSGMesh" parent="Depths"]
+transform = Transform( -35.3553, -2.59439e-06, -35.3553, 1.3113e-05, 50, -1.6782e-05, 35.3553, -2.1139e-05, -35.3553, 152.996, -1.00073, -85.0028 )
+use_collision = true
+mesh = ExtResource( 8 )
+material = SubResource( 22 )
+
+[node name="CSGBox" type="CSGBox" parent="Depths"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9964, 4.99927, -79.0028 )
+operation = 2
+width = 30.0
+height = 20.0
+depth = 112.0
+material = ExtResource( 7 )
+
+[node name="CSGBox2" type="CSGBox" parent="Depths"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59.9964, 4.99927, -158.003 )
+operation = 2
+width = 30.0
+height = 20.0
+depth = 112.0
+material = ExtResource( 7 )
+
+[node name="CSGBox3" type="CSGBox" parent="Depths"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0036, 4.99927, -158.003 )
+operation = 2
+width = 30.0
+height = 20.0
+depth = 112.0
+material = ExtResource( 7 )
+
+[node name="CSGBox4" type="CSGBox" parent="Depths"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9964, 4.99927, -122.003 )
+operation = 2
+width = 72.0
+height = 20.0
+depth = 40.0
+material = ExtResource( 7 )
