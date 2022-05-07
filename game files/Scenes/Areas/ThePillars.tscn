@@ -891,7 +891,7 @@ mesh = SubResource( 46 )
 material/0 = SubResource( 47 )
 
 [node name="ItemPickup" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 592.193, -262.577, 1227.13 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 593.893, -262.632, 1225.53 )
 item = "Abyss"
 id = 1287564
 
@@ -936,7 +936,7 @@ transform = Transform( -0.0756575, 0, 0.997134, 0, 1, 0, -0.997134, 0, -0.075657
 lift = NodePath("../MovingPlatform2")
 
 [node name="LiftLever2" parent="Lifts" instance=ExtResource( 14 )]
-transform = Transform( 2.18557e-08, 0.5, 0.866026, 1, -4.37114e-08, 0, 3.78552e-08, 0.866025, -0.5, 599.9, -261, 1237 )
+transform = Transform( -3.34849e-08, -0.766044, -0.642788, 1, -4.37114e-08, 0, -2.80972e-08, -0.642787, 0.766045, 593, -261, 1228.3 )
 lift = NodePath("../MovingPlatform")
 
 [node name="LiftLever3" parent="Lifts" instance=ExtResource( 14 )]
