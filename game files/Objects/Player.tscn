@@ -388,7 +388,6 @@ pitch_scale = 2.0
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 cast_shadow = 0
 mesh = SubResource( 3 )
-material/0 = null
 
 [node name="floorCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )

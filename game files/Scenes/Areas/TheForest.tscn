@@ -191,11 +191,11 @@ material/0 = SubResource( 7 )
 
 [node name="mapLoader2" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 30, 390, 10, 149 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="mapUnloader2" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 50, 356, 10, 142 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="Mountain" type="StaticBody" parent="."]
 

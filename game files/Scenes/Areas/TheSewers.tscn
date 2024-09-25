@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Materials/GrayBricks.tres" type="Material" id=1]
 [ext_resource path="res://Objects/mapLoader.tscn" type="PackedScene" id=2]
@@ -6,18 +6,8 @@
 [ext_resource path="res://Objects/Torch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/MovingPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/LiftLever.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Materials/Textures/wood.png" type="Texture" id=7]
 [ext_resource path="res://Objects/Enemies/Sludge.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/DeathTrigger.tscn" type="PackedScene" id=9]
-
-[sub_resource type="SpatialMaterial" id=7]
-albedo_texture = ExtResource( 7 )
-uv1_scale = Vector3( 0.1, 0.1, 0.1 )
-uv1_triplanar = true
-
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 7 )
-size = Vector3( 2, 250, 2 )
 
 [node name="TheSewers" type="Spatial"]
 
@@ -486,27 +476,27 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 640, 3.
 
 [node name="mapUnloader" parent="MapTriggers" instance=ExtResource( 3 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 783 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="mapLoader" parent="MapTriggers" instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 808 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="mapUnloader2" parent="MapTriggers" instance=ExtResource( 3 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 873 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="mapLoader2" parent="MapTriggers" instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 745, 6, 854 )
-mapId = 0
+mapId = [ 0 ]
 
 [node name="mapLoader3" parent="MapTriggers" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 5, 805, -194, 955 )
-mapId = 3
+mapId = [ 3 ]
 
 [node name="mapUnloader3" parent="MapTriggers" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 5, 813, -194, 955 )
-mapId = 3
+mapId = [ 3 ]
 
 [node name="LiftsLevers" type="Spatial" parent="."]
 
@@ -516,12 +506,6 @@ topPos = -1
 botPos = -200
 startTop = true
 id = 175753
-maxSpeed = 25
-
-[node name="MeshInstance2" type="MeshInstance" parent="LiftsLevers/MovingPlatform"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -126, 0 )
-mesh = SubResource( 3 )
-material/0 = null
 
 [node name="LiftLever" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 872, 1, 901 )
@@ -537,13 +521,6 @@ topPos = -1
 botPos = -200
 startTop = true
 id = 86286452
-maxSpeed = 25
-
-[node name="MeshInstance3" type="MeshInstance" parent="LiftsLevers/MovingPlatform2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -126, 0 )
-mesh = SubResource( 3 )
-skeleton = NodePath("../../MovingPlatform")
-material/0 = null
 
 [node name="LiftLever3" parent="LiftsLevers" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, -3.82137e-15, 1, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 841, -196, 806.8 )

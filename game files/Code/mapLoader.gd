@@ -1,7 +1,8 @@
 extends Area
 
-export var mapId = 1
+export var mapId = []
 
 func _on_mapLoader_body_entered(body):
 	if body.is_in_group("Player"):
-		Globals.maps.loadMapSection(mapId)
+		for id in range(mapId.size()):
+			Globals.maps.loadMapSection(mapId[id])

@@ -39,7 +39,7 @@ textures = [ [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ], [ ExtReso
 
 [sub_resource type="PlaneMesh" id=4]
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=11]
 code = "/*
 Realistic Water Shader for Godot 3.4 
 Modified to work with Godot 3.4 with thanks to jmarceno.
@@ -213,7 +213,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
+shader = SubResource( 11 )
 shader_param/wave_speed = 0.5
 shader_param/wave_a = Plane( 0, 0.1, 0, 1 )
 shader_param/wave_b = Plane( 0, 0.1, 0, 1 )
@@ -337,23 +337,19 @@ material/0 = SubResource( 7 )
 
 [node name="mapLoader" parent="." instance=ExtResource( 13 )]
 transform = Transform( 25.9808, 0, -0.5, 0, 20, 0, 15, 0, 0.866025, 590, 4, 927 )
+mapId = [ 1 ]
 
 [node name="mapUnloader3" parent="." instance=ExtResource( 14 )]
 transform = Transform( 28.2843, 0, -0.707107, 0, 20, 0, 28.2842, 0, 0.707107, 603, 7, 881 )
-
-[node name="mapLoader3" parent="." instance=ExtResource( 13 )]
-transform = Transform( 6, 0, 0, 0, 10, 0, 0, 0, 1, 93, 23, 701 )
-
-[node name="mapUnloader4" parent="." instance=ExtResource( 14 )]
-transform = Transform( 5, 0, 0, 0, 10, 0, 0, 0, 1, 93, 23, 724 )
+mapId = [ 1 ]
 
 [node name="mapLoader2" parent="." instance=ExtResource( 13 )]
 transform = Transform( 21.2132, 0, 0.707107, 0, 20, 0, -21.2132, 0, 0.707107, 519, 4, 920 )
-mapId = 2
+mapId = [ 2 ]
 
 [node name="mapUnloader2" parent="." instance=ExtResource( 14 )]
 transform = Transform( 38.637, 0, 0.258819, 0, 20, 0, -10.3528, 0, 0.965926, 506, 7, 881 )
-mapId = 2
+mapId = [ 2 ]
 
 [node name="City" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 765 )
@@ -494,6 +490,7 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 93, 15,
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 30 )]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 352, 0, 758 )
+visible = false
 songPath = "res://Audio/Music/orbCult.wav"
 
 [node name="LampPost" parent="." instance=ExtResource( 31 )]
